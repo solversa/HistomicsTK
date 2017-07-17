@@ -4,6 +4,9 @@ import Panel from 'girder_plugins/slicer_cli_web/views/Panel';
 import zoomWidget from '../templates/panels/zoomWidget.pug';
 import '../stylesheets/panels/zoomWidget.styl';
 
+import router from '../router';
+import { apiRoot } from 'girder/rest';
+
 /**
  * Define a widget for controlling the view magnification with
  * a dynamic slider and buttons.
@@ -30,7 +33,8 @@ var ZoomWidget = Panel.extend({
     events: _.extend(Panel.prototype.events, {
         'click .h-zoom-button': '_zoomButton',
         'input .h-zoom-slider': '_zoomSliderInput',
-        'change .h-zoom-slider': '_zoomSliderChange'
+        'change .h-zoom-slider': '_zoomSliderChange',
+        'click .h-download-button': '_downloadButton'
     }),
     initialize() {
         // set defaults that will be overwritten when a viewer is added
@@ -66,6 +70,7 @@ var ZoomWidget = Panel.extend({
         this.$el.html(zoomWidget({
             id: 'zoom-panel-container',
             title: 'Zoom',
+            title_download : 'Download',
             min: min,
             max: max,
             step: 0.01,
@@ -164,6 +169,24 @@ var ZoomWidget = Panel.extend({
     _zoomButton(evt) {
         this.setMagnification(this.$(evt.currentTarget).data('value'));
         this._zoomSliderChange();
+    },
+
+     /**
+     * A handler called when the download buttons is clicked.
+     */
+    _downloadButton(evt) {
+        var image_id = router.getQuery('image');
+        var bounds = router.getQuery('bounds');
+        var bounds_tab = bounds.split(',');
+        var url = apiRoot + '/item/' + image_id + '/tiles/region?'+$.param({width: window.innerWidth , height: window.innerHeight,left:bounds_tab[0],top:bounds_tab[1],right:bounds_tab[2],bottom:bounds_tab[3]});
+        var href_attr = this.$('a.h-download-link').attr('href')
+
+        if (typeof href_attr == typeof undefined || href_attr != url) {
+            this.$('a.h-download-link').attr({
+                href: url,
+                download: image_id
+            });
+        }
     },
 
     /**
