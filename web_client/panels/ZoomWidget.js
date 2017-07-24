@@ -1,11 +1,11 @@
 import _ from 'underscore';
 import Panel from 'girder_plugins/slicer_cli_web/views/Panel';
+import { apiRoot } from 'girder/rest';
 
 import zoomWidget from '../templates/panels/zoomWidget.pug';
 import '../stylesheets/panels/zoomWidget.styl';
-
 import router from '../router';
-import { apiRoot } from 'girder/rest';
+import editRegionOfInterest from '../dialogs/editRegionOfInterest'
 
 /**
  * Define a widget for controlling the view magnification with
@@ -34,14 +34,14 @@ var ZoomWidget = Panel.extend({
         'click .h-zoom-button': '_zoomButton',
         'input .h-zoom-slider': '_zoomSliderInput',
         'change .h-zoom-slider': '_zoomSliderChange',
-        'click .h-download-button': '_downloadButton'
+        'click .h-download-button-view': '_downloadView',
+        'click .h-download-button-area': '_downloadArea'
     }),
     initialize() {
         // set defaults that will be overwritten when a viewer is added
         this._maxMag = 20;
         this._maxZoom = 8;
         this._minZoom = 0;
-
         // bind the context of the viewer zoom handler
         this._zoomChanged = _.bind(this._zoomChanged, this);
     },
@@ -70,7 +70,8 @@ var ZoomWidget = Panel.extend({
         this.$el.html(zoomWidget({
             id: 'zoom-panel-container',
             title: 'Zoom',
-            title_download : 'Download',
+            title_download_view : 'Download View',
+            title_download_area : 'Download Area',
             min: min,
             max: max,
             step: 0.01,
@@ -81,6 +82,9 @@ var ZoomWidget = Panel.extend({
 
         // make the panel collapsible
         this.$('.s-panel-content').collapse({toggle: false});
+
+        // show tooltip of different download button
+        this.$('[data-toggle="tooltip"]').tooltip();
 
         // set the text value on the readonly input box
         this._zoomSliderInput();
@@ -172,21 +176,46 @@ var ZoomWidget = Panel.extend({
     },
 
      /**
-     * A handler called when the download buttons is clicked.
+     * A handler called when one of download buttons is clicked.
      */
-    _downloadButton(evt) {
+    _downloadView(evt) {
         var image_id = router.getQuery('image');
         var bounds = router.getQuery('bounds');
         var bounds_tab = bounds.split(',');
-        var url = apiRoot + '/item/' + image_id + '/tiles/region?'+$.param({width: window.innerWidth , height: window.innerHeight,left:bounds_tab[0],top:bounds_tab[1],right:bounds_tab[2],bottom:bounds_tab[3]});
-        var href_attr = this.$('a.h-download-link').attr('href')
-
-        if (typeof href_attr == typeof undefined || href_attr != url) {
-            this.$('a.h-download-link').attr({
-                href: url,
-                download: image_id
+        var url_view = apiRoot + '/item/' + image_id + '/tiles/region?'+$.param({width: window.innerWidth , height: window.innerHeight,left:bounds_tab[0],top:bounds_tab[1],right:bounds_tab[2],bottom:bounds_tab[3]});
+        var href_attr_view = this.$('a.h-download-link#download-view-link').attr('href');
+        if (typeof href_attr_view == typeof undefined || href_attr_view != url_view) {
+            this.$('a.h-download-link#download-view-link').attr({
+                href: url_view,
+                download: image_id + '_' + bounds
             });
         }
+    },
+
+    /**
+     * Respond to clicking an element type by putting the image
+     * viewer into "draw" mode and open a dialog windows to edit this area
+     * coord is an array : [width, height, left, top, zoom]
+     *
+     */
+    _downloadArea(evt) {
+        var zoom = Math.round(this._getSliderValue()*10)/10;
+        var maxZoom = this._maxZoom;
+        var minZoom = this._minZoom;
+        var maxMag = this._maxMag;
+        var modelValue = this.viewer.drawRegion().then((coord) => {
+            var area_params = {
+                left: coord[0],
+                top: coord[1],
+                width: coord[2],
+                height: coord[3],
+                zoom: zoom,
+                maxZoom: maxZoom,
+                maxMag: maxMag
+            };
+            console.log(area_params);
+            editRegionOfInterest(area_params);
+        });
     },
 
     /**
@@ -208,5 +237,6 @@ var ZoomWidget = Panel.extend({
         }
     }
 });
+
 
 export default ZoomWidget;
