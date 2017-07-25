@@ -182,7 +182,15 @@ var ZoomWidget = Panel.extend({
         var image_id = router.getQuery('image');
         var bounds = router.getQuery('bounds');
         var bounds_tab = bounds.split(',');
-        var url_view = apiRoot + '/item/' + image_id + '/tiles/region?'+$.param({width: window.innerWidth , height: window.innerHeight,left:bounds_tab[0],top:bounds_tab[1],right:bounds_tab[2],bottom:bounds_tab[3]});
+        var bound;
+        for (bound in bounds_tab) {
+            if (bounds_tab[bound] < 0) {
+                bounds_tab[bound] = 0;
+            }
+        }
+        var url_view = apiRoot + '/item/' + image_id + '/tiles/region?'
+            + $.param({width: window.innerWidth , height: window.innerHeight,left:bounds_tab[0],
+                top:bounds_tab[1],right:bounds_tab[2],bottom:bounds_tab[3]});
         var href_attr_view = this.$('a.h-download-link#download-view-link').attr('href');
         if (typeof href_attr_view == typeof undefined || href_attr_view != url_view) {
             this.$('a.h-download-link#download-view-link').attr({
@@ -213,7 +221,6 @@ var ZoomWidget = Panel.extend({
                 maxZoom: maxZoom,
                 maxMag: maxMag
             };
-            console.log(area_params);
             editRegionOfInterest(area_params);
         });
     },
