@@ -5,7 +5,7 @@ import { apiRoot } from 'girder/rest';
 import zoomWidget from '../templates/panels/zoomWidget.pug';
 import '../stylesheets/panels/zoomWidget.styl';
 import router from '../router';
-import editRegionOfInterest from '../dialogs/editRegionOfInterest'
+import editRegionOfInterest from '../dialogs/editRegionOfInterest';
 
 /**
  * Define a widget for controlling the view magnification with
@@ -70,8 +70,8 @@ var ZoomWidget = Panel.extend({
         this.$el.html(zoomWidget({
             id: 'zoom-panel-container',
             title: 'Zoom',
-            title_download_view : 'Download View',
-            title_download_area : 'Download Area',
+            title_download_view: 'Download View',
+            title_download_area: 'Download Area',
             min: min,
             max: max,
             step: 0.01,
@@ -179,23 +179,29 @@ var ZoomWidget = Panel.extend({
      * A handler called when one of download buttons is clicked.
      */
     _downloadView(evt) {
-        var image_id = router.getQuery('image');
+        var imageId = router.getQuery('image');
         var bounds = router.getQuery('bounds');
-        var bounds_tab = bounds.split(',');
+        var boundsTab = bounds.split(',');
         var bound;
-        for (bound in bounds_tab) {
-            if (bounds_tab[bound] < 0) {
-                bounds_tab[bound] = 0;
+        for (bound in boundsTab) {
+            if (boundsTab[bound] < 0) {
+                boundsTab[bound] = 0;
             }
         }
-        var url_view = apiRoot + '/item/' + image_id + '/tiles/region?'
-            + $.param({width: window.innerWidth , height: window.innerHeight,left:bounds_tab[0],
-                top:bounds_tab[1],right:bounds_tab[2],bottom:bounds_tab[3]});
-        var href_attr_view = this.$('a.h-download-link#download-view-link').attr('href');
-        if (typeof href_attr_view == typeof undefined || href_attr_view != url_view) {
+        var urlView = apiRoot + '/item/' + imageId + '/tiles/region?' +
+            $.param({
+                width: window.innerWidth,
+                height: window.innerHeight,
+                left: boundsTab[0],
+                top: boundsTab[1],
+                right: boundsTab[2],
+                bottom: boundsTab[3]
+            });
+        var hrefAttrView = this.$('a.h-download-link#download-view-link').attr('href');
+        if (typeof hrefAttrView === typeof undefined || hrefAttrView !== urlView) {
             this.$('a.h-download-link#download-view-link').attr({
-                href: url_view,
-                download: image_id + '_' + bounds
+                href: urlView,
+                download: imageId + '_' + bounds
             });
         }
     },
@@ -207,12 +213,11 @@ var ZoomWidget = Panel.extend({
      *
      */
     _downloadArea(evt) {
-        var zoom = Math.round(this._getSliderValue()*10)/10;
+        var zoom = Math.round(this._getSliderValue() * 10) / 10;
         var maxZoom = this._maxZoom;
-        var minZoom = this._minZoom;
         var maxMag = this._maxMag;
-        var modelValue = this.viewer.drawRegion().then((coord) => {
-            var area_params = {
+        this.viewer.drawRegion().then((coord) => {
+            var areaParams = {
                 left: coord[0],
                 top: coord[1],
                 width: coord[2],
@@ -221,7 +226,8 @@ var ZoomWidget = Panel.extend({
                 maxZoom: maxZoom,
                 maxMag: maxMag
             };
-            editRegionOfInterest(area_params);
+            editRegionOfInterest(areaParams);
+            return this;
         });
     },
 
@@ -244,6 +250,5 @@ var ZoomWidget = Panel.extend({
         }
     }
 });
-
 
 export default ZoomWidget;

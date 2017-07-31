@@ -18,21 +18,23 @@
             option TIFF
         .form-group
           label(for='h-element-width') Width
-          input#h-element-width.form-control(
+          input#h-element-width.update-form.form-control(
             type='text', min=0, step=1, value=element.width, disabled)
         .form-group
           label(for='h-element-height') Height
-          input#h-element-height.form-control(
+          input#h-element-height.update-form.form-control(
             type='text', min=0, step=1, value=element.height, disabled)
         .form-group
           label(for='nb-pixel') Number of Pixels
-          input.update-form#nb-pixel.form-control(
+          input#nb-pixel.update-form.form-control(
             type='text', value=numberOfPixel, disabled)
         .form-group
           label(for='size-file') Approximate size of the file
-          input#size-file.form-control(type='text', value=fileSize, disabled)
+          input#size-file.update-form.form-control(type='text', value=fileSize, disabled)
         .g-validation-failed-message.hidden
       .modal-footer
-        a.h-download-link#download-area-link
-          button.btn.btn-small.btn-primary.h-submit#download-submit(type='submit') Download
+        a#download-area-link.h-download-link
+          button#download-submit.btn.btn-small.btn-primary.h-submit(type='submit') 
+            i.icon-download
+            |  Download
         button.btn.btn-small.btn-default(data-dismiss='modal') Cancel
