@@ -26,7 +26,7 @@ var EditRegionOfInterest = View.extend({
     },
 
     render() {        // Has to be re-structured
-        var magnification = this.zoomToMagnification(this.areaElement.zoom);
+        var magnification = this.areaElement.zoom;
         if (magnification <= 1) {
             magnification = 1;
         } else if (magnification >= this._maxMag) {
@@ -47,23 +47,26 @@ var EditRegionOfInterest = View.extend({
      * Convert from zoom level to magnification.
      */
     zoomToMagnification(zoom) {
-        return Math.round(parseFloat(this.areaElement.maxMag) *
-            Math.pow(2, zoom - parseFloat(this.areaElement.maxZoom)) * 10) / 10;
+        return Math.round(parseFloat(this._maxMag) *
+            Math.pow(2, zoom - parseFloat(this._maxZoom)) * 10) / 10;
     },
 
     /**
      * Convert from magnification to zoom level.
      */
     magnificationToZoom(magnification) {
-        return parseFloat(this.areaElement.maxZoom) -
-            Math.log2(this.areaElement.maxMag / magnification);
+        return parseFloat(this._maxZoom) -
+            Math.log2(this._maxMag / magnification);
     },
 
     /**
      * Get the number of pixel in the region of interest
      */
     getNumberPixels() {
-        var Npixel = Math.pow(2, this._zoom - parseFloat(this.areaElement.maxZoom)) * this._width * this._height;
+        var factor = Math.pow(2, this._zoom - this._maxZoom);
+        var scaleWidth = factor * this._width;
+        var scaleHeight = factor * this._height;
+        var Npixel = scaleWidth * scaleHeight;
         return Npixel;
     },
 
@@ -121,20 +124,23 @@ var EditRegionOfInterest = View.extend({
         switch (selectedOption) {
             case 'JPEG':     //     JPEG
                 this._format = 'JPEG';
-                this._compressionRatio = 0.2;
+                this._compressionRatio = 0.4;
                 break;
             case 'PNG':     //  PNG
                 this._format = 'PNG';
-                this._compressionRatio = 0.4;
+                this._compressionRatio = 0.5;
                 break;
             case 'TIFF':     // TIFF
                 this._format = 'TIFF';
-                this._compressionRatio = 0.8;
+                this._compressionRatio = 0.6;
                 break;
             default:     // JPEG is the default format
-                this._compressionRatio = 0.2;
+                this._compressionRatio = 0.4;
         }
         this._zoom = Math.round(this.magnificationToZoom(parseFloat($('#h-element-mag').val())));
+        var factor = Math.pow(2, this._zoom - this._maxZoom);
+        $('#h-element-width').val(factor * this._width);
+        $('#h-element-height').val(factor * this._height);
         $('#nb-pixel').val(this.getNumberPixels());
         var fileSize = this.getConvertFileSize();
         $('#size-file').val(fileSize);

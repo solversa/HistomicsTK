@@ -209,7 +209,7 @@ var ZoomWidget = Panel.extend({
     /**
      * Respond to clicking an element type by putting the image
      * viewer into "draw" mode and open a dialog windows to edit this area
-     * coord is an array : [width, height, left, top, zoom]
+     * params is an object.
      *
      */
     _downloadArea(evt) {
