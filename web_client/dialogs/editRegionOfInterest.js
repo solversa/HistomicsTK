@@ -14,29 +14,25 @@ var EditRegionOfInterest = View.extend({
     },
 
     initialize() {
-        this._sizeCte = 100;
+        this._sizeCte = 1000;    // Constante to find
         this._format = 'JPEG';    // JPEG is the default format
-        this._zoom = 0;
-        this._compressionRatio = 0.2;
-        // set defaults has to change
-        this._width = 0;
-        this._height = 0;
-        this._maxMag = 20;
-        this._maxZoom = 8;    // have to put the real value of all these variables
+        this._compressionRatio = 0.35;    // JPEG ratio
+        this._magnification = 0;
     },
 
-    render() {        // Has to be re-structured
-        var magnification = this.areaElement.zoom;
-        if (magnification <= 1) {
-            magnification = 1;
-        } else if (magnification >= this._maxMag) {
-            magnification = this._maxMag;
+    render() {
+        if (this._magnification <= 1) {
+            this._magnification = 1;
+        } else if (this._magnification >= this.areaElement.maxMag) {
+            this._magnification = this.areaElement.maxMag;
         }
-
+        var bounds = this.scaleBounds();
         this.$el.html(
             editRegionOfInterest({
-                magnification: magnification,
-                element: this.areaElement,
+                magnification: this._magnification,
+                scaleWidth: bounds.width,
+                scaleHeight: bounds.height,
+                maxMag: this.areaElement.maxMag,
                 numberOfPixel: this.getNumberPixels(),
                 fileSize: this.getConvertFileSize()
             })
@@ -47,26 +43,35 @@ var EditRegionOfInterest = View.extend({
      * Convert from zoom level to magnification.
      */
     zoomToMagnification(zoom) {
-        return Math.round(parseFloat(this._maxMag) *
-            Math.pow(2, zoom - parseFloat(this._maxZoom)) * 10) / 10;
+        return Math.round(parseFloat(this.areaElement.maxMag) *
+            Math.pow(2, zoom - parseFloat(this.areaElement.maxZoom)) * 10) / 10;
     },
 
     /**
      * Convert from magnification to zoom level.
      */
     magnificationToZoom(magnification) {
-        return parseFloat(this._maxZoom) -
-            Math.log2(this._maxMag / magnification);
+        return parseFloat(this.areaElement.maxZoom) -
+            Math.log2(this.areaElement.maxMag / magnification);
+    },
+
+    /**
+     * Convert from magnification to zoom level.
+     */
+    scaleBounds() {
+        var zoom = this.magnificationToZoom(this._magnification);
+        var factor = Math.pow(2, zoom - this.areaElement.maxZoom);
+        var scaleWidth = Math.round(factor * this.areaElement.width);
+        var scaleHeight = Math.round(factor * this.areaElement.height);
+        return { 'width': scaleWidth, 'height': scaleHeight };
     },
 
     /**
      * Get the number of pixel in the region of interest
      */
     getNumberPixels() {
-        var factor = Math.pow(2, this._zoom - this._maxZoom);
-        var scaleWidth = factor * this._width;
-        var scaleHeight = factor * this._height;
-        var Npixel = scaleWidth * scaleHeight;
+        var bounds = this.scaleBounds();
+        var Npixel = bounds.width * bounds.height;
         return Npixel;
     },
 
@@ -84,7 +89,7 @@ var EditRegionOfInterest = View.extend({
     getConvertFileSize() {
         var Nbytes = this.getFileSize();
         var convertedSize = formatSize(Nbytes);
-        if (Nbytes >= 2 ** 30) {
+        if (Nbytes >= Math.pow(2, 30)) {
             this.downloadDisable(true);
         } else {
             this.downloadDisable(false);
@@ -124,7 +129,7 @@ var EditRegionOfInterest = View.extend({
         switch (selectedOption) {
             case 'JPEG':     //     JPEG
                 this._format = 'JPEG';
-                this._compressionRatio = 0.4;
+                this._compressionRatio = 0.35;
                 break;
             case 'PNG':     //  PNG
                 this._format = 'PNG';
@@ -135,15 +140,14 @@ var EditRegionOfInterest = View.extend({
                 this._compressionRatio = 0.6;
                 break;
             default:     // JPEG is the default format
-                this._compressionRatio = 0.4;
+                this._compressionRatio = 0.35;
         }
-        this._zoom = Math.round(this.magnificationToZoom(parseFloat($('#h-element-mag').val())));
-        var factor = Math.pow(2, this._zoom - this._maxZoom);
-        $('#h-element-width').val(factor * this._width);
-        $('#h-element-height').val(factor * this._height);
+        this._magnification = parseFloat($('#h-element-mag').val());
+        var bounds = this.scaleBounds();
+        $('#h-element-width').val(bounds.width);
+        $('#h-element-height').val(bounds.height);
         $('#nb-pixel').val(this.getNumberPixels());
-        var fileSize = this.getConvertFileSize();
-        $('#size-file').val(fileSize);
+        $('#size-file').val(this.getConvertFileSize());
     },
 
     /**
@@ -154,13 +158,13 @@ var EditRegionOfInterest = View.extend({
         var imageId = router.getQuery('image');
         var left = this.areaElement.left;
         var top = this.areaElement.top;
-        var right = left + this._width;
-        var bottom = top + this._height;
+        var right = left + this.areaElement.width;
+        var bottom = top + this.areaElement.height;
         var magnification = parseFloat($('#h-element-mag').val());
         var urlArea = apiRoot + '/item/' + imageId + '/tiles/region?' +
             $.param({
-                regionWidth: this._width,
-                regionHeight: this._height,
+                regionWidth: this.areaElement.width,
+                regionHeight: this.areaElement.height,
                 left: left,
                 top: top,
                 right: right,
@@ -190,10 +194,7 @@ var dialog = new EditRegionOfInterest({
  */
 function show(areaElement) {
     dialog.areaElement = areaElement;
-    dialog._width = parseFloat(areaElement.width);
-    dialog._height = parseFloat(areaElement.height);
-    dialog._maxMag = parseFloat(areaElement.maxMag);
-    dialog._maxZoom = parseFloat(areaElement.maxZoom);
+    dialog._magnification = parseFloat(areaElement.magnification);
     dialog.setElement('#g-dialog-container').render();
     return dialog;
 }

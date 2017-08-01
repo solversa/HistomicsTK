@@ -42,6 +42,7 @@ var ZoomWidget = Panel.extend({
         this._maxMag = 20;
         this._maxZoom = 8;
         this._minZoom = 0;
+        this._cancelSelection = false;
         // bind the context of the viewer zoom handler
         this._zoomChanged = _.bind(this._zoomChanged, this);
     },
@@ -197,6 +198,11 @@ var ZoomWidget = Panel.extend({
                 right: boundsTab[2],
                 bottom: boundsTab[3]
             });
+        if (this._cancelSelection === true) {
+            this.viewer.annotationLayer.mode(null);
+            this._cancelSelection = false;
+            $('.h-download-button-area').css('background-color', '');
+        }
         var hrefAttrView = this.$('a.h-download-link#download-view-link').attr('href');
         if (typeof hrefAttrView === typeof undefined || hrefAttrView !== urlView) {
             this.$('a.h-download-link#download-view-link').attr({
@@ -213,22 +219,32 @@ var ZoomWidget = Panel.extend({
      *
      */
     _downloadArea(evt) {
-        var zoom = Math.round(this._getSliderValue() * 10) / 10;
+        var mag = Math.round(this._getSliderValue() * 10) / 10;
         var maxZoom = this._maxZoom;
         var maxMag = this._maxMag;
-        this.viewer.drawRegion().then((coord) => {
-            var areaParams = {
-                left: coord[0],
-                top: coord[1],
-                width: coord[2],
-                height: coord[3],
-                zoom: zoom,
-                maxZoom: maxZoom,
-                maxMag: maxMag
-            };
-            editRegionOfInterest(areaParams);
-            return this;
-        });
+        if (this._cancelSelection === true) {
+            this.viewer.annotationLayer.mode(null);
+            this._cancelSelection = false;
+            $('.h-download-button-area').css('background-color', '');
+        } else {
+            $('.h-download-button-area').css('background-color', '#e6e6e6');
+            this._cancelSelection = true;
+            this.viewer.drawRegion().then((coord) => {
+                var areaParams = {
+                    left: coord[0],
+                    top: coord[1],
+                    width: coord[2],
+                    height: coord[3],
+                    magnification: mag,
+                    maxZoom: maxZoom,
+                    maxMag: maxMag
+                };
+                this._cancelSelection = false;
+                $('.h-download-button-area').css('background-color', '');
+                editRegionOfInterest(areaParams);
+                return this;
+            });
+        }
     },
 
     /**
