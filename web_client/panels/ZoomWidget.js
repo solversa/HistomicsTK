@@ -189,15 +189,16 @@ var ZoomWidget = Panel.extend({
                 boundsTab[bound] = 0;
             }
         }
-        var urlView = apiRoot + '/item/' + imageId + '/tiles/region?' +
-            $.param({
-                width: window.innerWidth,
-                height: window.innerHeight,
-                left: boundsTab[0],
-                top: boundsTab[1],
-                right: boundsTab[2],
-                bottom: boundsTab[3]
-            });
+        var params = $.param({
+            width: window.innerWidth,
+            height: window.innerHeight,
+            left: boundsTab[0],
+            top: boundsTab[1],
+            right: boundsTab[2],
+            bottom: boundsTab[3],
+            contentDisposition: 'attachment'
+        });
+        var urlView = `/${apiRoot}/item/${imageId}/tiles/region?${params}`;
         if (this._cancelSelection === true) {
             this.viewer.annotationLayer.mode(null);
             this._cancelSelection = false;
@@ -206,8 +207,7 @@ var ZoomWidget = Panel.extend({
         var hrefAttrView = this.$('a.h-download-link#download-view-link').attr('href');
         if (typeof hrefAttrView === typeof undefined || hrefAttrView !== urlView) {
             this.$('a.h-download-link#download-view-link').attr({
-                href: urlView,
-                download: imageId + '_' + bounds
+                href: urlView
             });
         }
     },

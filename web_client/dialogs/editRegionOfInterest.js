@@ -9,7 +9,6 @@ import '../stylesheets/panels/zoomWidget.styl';
 
 var EditRegionOfInterest = View.extend({
     events: {
-        'click .h-submit': 'downloadArea',
         'change .update-form': 'updateform'
     },
 
@@ -37,6 +36,7 @@ var EditRegionOfInterest = View.extend({
                 fileSize: this.getConvertFileSize()
             })
         ).girderModal(this);
+        this.updateform();
     },
 
     /**
@@ -121,7 +121,8 @@ var EditRegionOfInterest = View.extend({
     },
 
     /**
-     * Get the size of the file before download it
+     * Set the size of the file, bounds, format...
+     * And download the image
      */
     updateform(evt) {
         // Find the good compresion ration there are random now
@@ -148,32 +149,35 @@ var EditRegionOfInterest = View.extend({
         $('#h-element-height').val(bounds.height);
         $('#nb-pixel').val(this.getNumberPixels());
         $('#size-file').val(this.getConvertFileSize());
+        var url = this.getUrl();
+        this.$('#download-area-link').attr('href', url);
     },
 
     /**
      * Get all data from the form and set the attributes of the
-     * Region of Interest (triggering a change event).
+     * Region of Interest (triggering a change event)
+     * Return the url to download the image
      */
-    downloadArea(evt) {
+    getUrl() {
         var imageId = router.getQuery('image');
         var left = this.areaElement.left;
         var top = this.areaElement.top;
         var right = left + this.areaElement.width;
         var bottom = top + this.areaElement.height;
         var magnification = parseFloat($('#h-element-mag').val());
-        var urlArea = apiRoot + '/item/' + imageId + '/tiles/region?' +
-            $.param({
-                regionWidth: this.areaElement.width,
-                regionHeight: this.areaElement.height,
-                left: left,
-                top: top,
-                right: right,
-                bottom: bottom,
-                encoding: this._format,
-                contentDisposition: 'attachment',
-                magnification: magnification });
-        window.location.href = urlArea;
-        this.$el.modal('hide');
+        var params = $.param({
+            regionWidth: this.areaElement.width,
+            regionHeight: this.areaElement.height,
+            left: left,
+            top: top,
+            right: right,
+            bottom: bottom,
+            encoding: this._format,
+            contentDisposition: 'attachment',
+            magnification: magnification
+        });
+        var urlArea = `/${apiRoot}/item/${imageId}/tiles/region?${params}`;
+        return urlArea;
     }
 });
 
