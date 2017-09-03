@@ -134,11 +134,11 @@ var EditRegionOfInterest = View.extend({
                 break;
             case 'PNG':     //  PNG
                 this._format = 'PNG';
-                this._compressionRatio = 0.5;
+                this._compressionRatio = 0.7;
                 break;
             case 'TIFF':     // TIFF
                 this._format = 'TIFF';
-                this._compressionRatio = 0.6;
+                this._compressionRatio = 0.8;
                 break;
             default:     // JPEG is the default format
                 this._compressionRatio = 0.35;

@@ -89,6 +89,8 @@ var ZoomWidget = Panel.extend({
 
         // set the text value on the readonly input box
         this._zoomSliderInput();
+
+        return this;
     },
 
     /**
@@ -177,7 +179,7 @@ var ZoomWidget = Panel.extend({
     },
 
      /**
-     * A handler called when one of download buttons is clicked.
+     * A handler called when the download view button is clicked.
      */
     _downloadView(evt) {
         var imageId = router.getQuery('image');
