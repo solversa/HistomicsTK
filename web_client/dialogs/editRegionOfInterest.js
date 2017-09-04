@@ -37,6 +37,7 @@ var EditRegionOfInterest = View.extend({
             })
         ).girderModal(this);
         this.updateform();
+        return this;
     },
 
     /**
