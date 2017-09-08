@@ -201,17 +201,15 @@ var ZoomWidget = Panel.extend({
             contentDisposition: 'attachment'
         });
         var urlView = `/${apiRoot}/item/${imageId}/tiles/region?${params}`;
-        if (this._cancelSelection === true) {
+        if (this._cancelSelection) {
             this.viewer.annotationLayer.mode(null);
             this._cancelSelection = false;
-            $('.h-download-button-area').css('background-color', '');
+            this.$('.h-download-button-area').removeClass('h-download-area-button-selected');
         }
         var hrefAttrView = this.$('a.h-download-link#download-view-link').attr('href');
-        if (typeof hrefAttrView === typeof undefined || hrefAttrView !== urlView) {
-            this.$('a.h-download-link#download-view-link').attr({
-                href: urlView
-            });
-        }
+        this.$('a.h-download-link#download-view-link').attr({
+            href: urlView
+        });
     },
 
     /**
@@ -221,15 +219,15 @@ var ZoomWidget = Panel.extend({
      *
      */
     _downloadArea(evt) {
-        var mag = Math.round(this._getSliderValue() * 10) / 10;
-        var maxZoom = this._maxZoom;
-        var maxMag = this._maxMag;
-        if (this._cancelSelection === true) {
+        const mag = Math.round(this._getSliderValue() * 10) / 10;
+        const maxZoom = this._maxZoom;
+        const maxMag = this._maxMag;
+        if (this._cancelSelection) {
             this.viewer.annotationLayer.mode(null);
             this._cancelSelection = false;
-            $('.h-download-button-area').css('background-color', '');
+            this.$('.h-download-button-area').removeClass('h-download-area-button-selected');
         } else {
-            $('.h-download-button-area').css('background-color', '#e6e6e6');
+            this.$('.h-download-button-area').addClass('h-download-area-button-selected');
             this._cancelSelection = true;
             this.viewer.drawRegion().then((coord) => {
                 var areaParams = {
@@ -242,7 +240,7 @@ var ZoomWidget = Panel.extend({
                     maxMag: maxMag
                 };
                 this._cancelSelection = false;
-                $('.h-download-button-area').css('background-color', '');
+                this.$('.h-download-button-area').removeClass('h-download-area-button-selected');
                 editRegionOfInterest(areaParams);
                 return this;
             });

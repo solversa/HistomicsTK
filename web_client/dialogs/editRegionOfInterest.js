@@ -72,8 +72,8 @@ var EditRegionOfInterest = View.extend({
      */
     getNumberPixels() {
         var bounds = this.scaleBounds();
-        var Npixel = bounds.width * bounds.height;
-        return Npixel;
+        var pixelNumber = bounds.width * bounds.height;
+        return pixelNumber;
     },
 
     /**
@@ -88,13 +88,9 @@ var EditRegionOfInterest = View.extend({
      * Get the size of the file in the appropriate unity (Bytes, MB, GB...)
      */
     getConvertFileSize() {
-        var Nbytes = this.getFileSize();
-        var convertedSize = formatSize(Nbytes);
-        if (Nbytes >= Math.pow(2, 30)) {
-            this.downloadDisable(true);
-        } else {
-            this.downloadDisable(false);
-        }
+        var bytesNumber = this.getFileSize();
+        var convertedSize = formatSize(bytesNumber);
+        this.downloadDisable(bytesNumber >= Math.pow(2, 30));
         return convertedSize;
     },
 
@@ -102,22 +98,13 @@ var EditRegionOfInterest = View.extend({
      * Disable the Download button if SizeFile > 1GB
      */
     downloadDisable(bool) {
-        var element = $('#msgDisable').attr('id');
-        if (bool === true) {
-            $('#download-submit').attr('disabled', 'disabled');
-            if (typeof element === typeof undefined) {
-                var msgDisable = $('<span></span>').text('Size > 1GB : Impossible Download ');
-                msgDisable.attr('id', 'msgDisable');
-                msgDisable.css({'color': 'red', 'margin-right': '120px'});
-                $('#download-area-link').before(msgDisable);
-            }
-        } else if (bool === false) {
-            $('#download-submit').removeAttr('disabled');
-            if (typeof element !== typeof undefined) {
-                $('#msgDisable').remove();
-            }
+        if (bool) {
+            this.$('#h-download-area-link').attr('disabled', 'disabled');
+            this.$('#h-msgDisable').removeClass('hidden');
+            this.$('#h-download-area-link').bind('click', (ev) => ev.preventDefault());
         } else {
-            console.log('Error in \'downloadDisable\' function');
+            this.$('#h-download-area-link').removeAttr('disabled').unbind('click');
+            this.$('#h-msgDisable').addClass('hidden');
         }
     },
 
@@ -127,7 +114,9 @@ var EditRegionOfInterest = View.extend({
      */
     updateform(evt) {
         // Find the good compresion ration there are random now
-        var selectedOption = $('#download-image-format option:selected').text();
+        const selectedOption = $('#h-download-image-format option:selected').text();
+        const bounds = this.scaleBounds();
+        const url = this.getUrl();
         switch (selectedOption) {
             case 'JPEG':     //     JPEG
                 this._format = 'JPEG';
@@ -145,13 +134,11 @@ var EditRegionOfInterest = View.extend({
                 this._compressionRatio = 0.35;
         }
         this._magnification = parseFloat($('#h-element-mag').val());
-        var bounds = this.scaleBounds();
-        $('#h-element-width').val(bounds.width);
-        $('#h-element-height').val(bounds.height);
-        $('#nb-pixel').val(this.getNumberPixels());
-        $('#size-file').val(this.getConvertFileSize());
-        var url = this.getUrl();
-        this.$('#download-area-link').attr('href', url);
+        this.$('#h-element-width').val(bounds.width);
+        this.$('#h-element-height').val(bounds.height);
+        this.$('#h-nb-pixel').val(this.getNumberPixels());
+        this.$('#h-size-file').val(this.getConvertFileSize());
+        this.$('#h-download-area-link').attr('href', url);
     },
 
     /**
@@ -160,13 +147,13 @@ var EditRegionOfInterest = View.extend({
      * Return the url to download the image
      */
     getUrl() {
-        var imageId = router.getQuery('image');
-        var left = this.areaElement.left;
-        var top = this.areaElement.top;
-        var right = left + this.areaElement.width;
-        var bottom = top + this.areaElement.height;
-        var magnification = parseFloat($('#h-element-mag').val());
-        var params = $.param({
+        const imageId = router.getQuery('image');
+        const left = this.areaElement.left;
+        const top = this.areaElement.top;
+        const right = left + this.areaElement.width;
+        const bottom = top + this.areaElement.height;
+        const magnification = parseFloat($('#h-element-mag').val());
+        const params = $.param({
             regionWidth: this.areaElement.width,
             regionHeight: this.areaElement.height,
             left: left,
@@ -177,7 +164,7 @@ var EditRegionOfInterest = View.extend({
             contentDisposition: 'attachment',
             magnification: magnification
         });
-        var urlArea = `/${apiRoot}/item/${imageId}/tiles/region?${params}`;
+        const urlArea = `/${apiRoot}/item/${imageId}/tiles/region?${params}`;
         return urlArea;
     }
 });

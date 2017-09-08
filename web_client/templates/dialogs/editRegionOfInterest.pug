@@ -11,8 +11,8 @@
           input#h-element-mag.update-form.input-sm.form-control(
             type='number', min=1, max=maxMag, step=0.1, value=magnification)
         .form-group
-          label(for='download-image-format') Format
-          select#download-image-format.update-form.form-control(name='format')
+          label(for='h-download-image-format') Format
+          select#h-download-image-format.update-form.form-control(name='format')
             option JPEG
             option PNG
             option TIFF
@@ -26,14 +26,15 @@
             type='text', min=0, step=1, value=scaleHeight, disabled)
         .form-group
           label(for='nb-pixel') Number of Pixels
-          input#nb-pixel.update-form.form-control(
+          input#h-nb-pixel.update-form.form-control(
             type='text', value=numberOfPixel, disabled)
         .form-group
           label(for='size-file') Approximate size of the file
-          input#size-file.update-form.form-control(type='text', value=fileSize, disabled)
-        .g-validation-failed-message.hidden
+          input#h-size-file.update-form.form-control(type='text', value=fileSize, disabled)
       .modal-footer
-        a#download-area-link.h-download-link.btn.btn-small.btn-primary
+        span#h-msgDisable.g-validation-failed-message
+          | Size > 1GB : Please select a smaller area.
+        a#h-download-area-link.h-download-link.btn.btn-small.btn-primary
           i.icon-download
           |  Download
         button.btn.btn-small.btn-default(data-dismiss='modal') Cancel
