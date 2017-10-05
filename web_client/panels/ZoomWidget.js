@@ -206,7 +206,6 @@ var ZoomWidget = Panel.extend({
             this._cancelSelection = false;
             this.$('.h-download-button-area').removeClass('h-download-area-button-selected');
         }
-        var hrefAttrView = this.$('a.h-download-link#download-view-link').attr('href');
         this.$('a.h-download-link#download-view-link').attr({
             href: urlView
         });
