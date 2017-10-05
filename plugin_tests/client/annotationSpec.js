@@ -202,8 +202,6 @@ $(function () {
             runs(function () {
                 $('#h-element-mag').val(10).trigger('change');
                 var i = 0;
-
-
                 // Check all the setting labels change
                 for (var value in oldSettings) {
                     expect(elements[i].val()).not.toEqual(value);
