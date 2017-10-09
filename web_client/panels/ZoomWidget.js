@@ -1,11 +1,13 @@
 import _ from 'underscore';
+
 import Panel from 'girder_plugins/slicer_cli_web/views/Panel';
 import { apiRoot } from 'girder/rest';
 
+import editRegionOfInterest from '../dialogs/editRegionOfInterest';
+import router from '../router';
+
 import zoomWidget from '../templates/panels/zoomWidget.pug';
 import '../stylesheets/panels/zoomWidget.styl';
-import router from '../router';
-import editRegionOfInterest from '../dialogs/editRegionOfInterest';
 
 /**
  * Define a widget for controlling the view magnification with

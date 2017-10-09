@@ -116,21 +116,21 @@ var EditRegionOfInterest = View.extend({
         // Find the good compresion ration there are random now
         const selectedOption = $('#h-download-image-format option:selected').text();
         const bounds = this.scaleBounds();
-        const url = this.getUrl();
         switch (selectedOption) {
-            case 'JPEG':     //     JPEG
+            case 'JPEG':
                 this._format = 'JPEG';
                 this._compressionRatio = 0.35;
                 break;
-            case 'PNG':     //  PNG
+            case 'PNG':
                 this._format = 'PNG';
                 this._compressionRatio = 0.7;
                 break;
-            case 'TIFF':     // TIFF
+            case 'TIFF':
                 this._format = 'TIFF';
                 this._compressionRatio = 0.8;
                 break;
-            default:     // JPEG is the default format
+            default:
+                // JPEG is the default format
                 this._compressionRatio = 0.35;
         }
         this._magnification = parseFloat($('#h-element-mag').val());
@@ -138,7 +138,7 @@ var EditRegionOfInterest = View.extend({
         this.$('#h-element-height').val(bounds.height);
         this.$('#h-nb-pixel').val(this.getNumberPixels());
         this.$('#h-size-file').val(this.getConvertFileSize());
-        this.$('#h-download-area-link').attr('href', url);
+        this.$('#h-download-area-link').attr('href', this.getUrl());
     },
 
     /**
