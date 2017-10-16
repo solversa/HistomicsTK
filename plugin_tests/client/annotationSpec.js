@@ -121,32 +121,31 @@ $(function () {
             expect(annotation.annotation.elements.length).toBe(numberOfAnnotations);
         });
     }
-
     describe('Annotation tests', function () {
         describe('setup', function () {
             it('login', function () {
                 girderTest.waitForLoad();
+                runs(function () {
+                    $('.g-login').click();
+                });
 
-            runs(function () {
-                $('.g-login').click();
+                girderTest.waitForDialog();
+                runs(function () {
+                    $('#g-login').val('admin');
+                    $('#g-password').val('password');
+                    $('#g-login-button').click();
+                });
+
+                waitsFor(function () {
+                    return $('.h-user-dropdown-link').length > 0;
+                }, 'user to be logged in');
             });
 
-            girderTest.waitForDialog();
-            runs(function () {
-                $('#g-login').val('admin');
-                $('#g-password').val('password');
-                $('#g-login-button').click();
-            });
-
-            waitsFor(function () {
-                return $('.h-user-dropdown-link').length > 0;
-            }, 'user to be logged in');
-        });
-
-        it('open image', function () {
-            openImage('image');
-            runs(function () {
-                geojsMap = app.bodyView.viewer;
+            it('open image', function () {
+                openImage('image');
+                runs(function () {
+                    geojsMap = app.bodyView.viewer;
+                });
             });
         });
     });
