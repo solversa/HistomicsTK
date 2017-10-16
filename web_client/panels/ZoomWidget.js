@@ -187,8 +187,7 @@ var ZoomWidget = Panel.extend({
         var imageId = router.getQuery('image');
         var bounds = router.getQuery('bounds');
         var boundsTab = bounds.split(',');
-        var bound;
-        for (bound in boundsTab) {
+        for (var bound in boundsTab) {
             if (boundsTab[bound] < 0) {
                 boundsTab[bound] = 0;
             }
