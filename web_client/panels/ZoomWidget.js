@@ -185,20 +185,20 @@ var ZoomWidget = Panel.extend({
      */
     _downloadView(evt) {
         var imageId = router.getQuery('image');
-        var bounds = router.getQuery('bounds');
-        var boundsTab = bounds.split(',');
-        for (var bound in boundsTab) {
-            if (boundsTab[bound] < 0) {
-                boundsTab[bound] = 0;
+        var bounds = this.renderer.bounds();
+        for (var bound in bounds) {
+            bounds[bound] = Math.round(bounds[bound]);
+            if (bounds[bound] < 0) {
+                bounds[bound] = 0;
             }
         }
         var params = $.param({
             width: window.innerWidth,
             height: window.innerHeight,
-            left: boundsTab[0],
-            top: boundsTab[1],
-            right: boundsTab[2],
-            bottom: boundsTab[3],
+            left: bounds.left,
+            top: bounds.top,
+            right: bounds.right,
+            bottom: bounds.bottom,
             contentDisposition: 'attachment'
         });
         var urlView = `/${apiRoot}/item/${imageId}/tiles/region?${params}`;
