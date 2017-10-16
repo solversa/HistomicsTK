@@ -115,7 +115,6 @@ var EditRegionOfInterest = View.extend({
     updateform(evt) {
         // Find the good compresion ration there are random now
         const selectedOption = $('#h-download-image-format option:selected').text();
-        const bounds = this.scaleBounds();
         switch (selectedOption) {
             case 'JPEG':
                 this._format = 'JPEG';
@@ -134,6 +133,7 @@ var EditRegionOfInterest = View.extend({
                 this._compressionRatio = 0.35;
         }
         this._magnification = parseFloat($('#h-element-mag').val());
+        const bounds = this.scaleBounds();
         this.$('#h-element-width').val(bounds.width);
         this.$('#h-element-height').val(bounds.height);
         this.$('#h-nb-pixel').val(this.getNumberPixels());
