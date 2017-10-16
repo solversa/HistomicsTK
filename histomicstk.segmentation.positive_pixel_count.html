@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>histomicstk.segmentation.positive_pixel_count &mdash; HistomicsTK 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="HistomicsTK 0.1.0 documentation" href="index.html"/>
+        <link rel="up" title="histomicstk.segmentation" href="histomicstk.segmentation.html"/>
+        <link rel="next" title="histomicstk.features" href="histomicstk.features.html"/>
+        <link rel="prev" title="histomicstk.segmentation.nuclear" href="histomicstk.segmentation.nuclear.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> HistomicsTK
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api-docs.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="histomicstk.html">histomicstk</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="histomicstk.utils.html">utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="histomicstk.preprocessing.html">preprocessing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="histomicstk.filters.html">filters</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="histomicstk.segmentation.html">segmentation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="histomicstk.segmentation.label.html">label mask processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="histomicstk.segmentation.level_set.html">level-set segmentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="histomicstk.segmentation.nuclear.html">nuclei segmentation</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">positive pixel counting</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="histomicstk.features.html">features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HistomicsTK</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api-docs.html">API Documentation</a> &raquo;</li>
+        
+          <li><a href="histomicstk.html">histomicstk</a> &raquo;</li>
+        
+          <li><a href="histomicstk.segmentation.html">histomicstk.segmentation</a> &raquo;</li>
+        
+      <li>histomicstk.segmentation.positive_pixel_count</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/histomicstk.segmentation.positive_pixel_count.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="module-histomicstk.segmentation.positive_pixel_count">
+<span id="histomicstk-segmentation-positive-pixel-count"></span><h1>histomicstk.segmentation.positive_pixel_count<a class="headerlink" href="#module-histomicstk.segmentation.positive_pixel_count" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="histomicstk.segmentation.positive_pixel_count.Parameters">
+<em class="property">class </em><code class="descclassname">histomicstk.segmentation.positive_pixel_count.</code><code class="descname">Parameters</code><a class="reference internal" href="_modules/histomicstk/segmentation/positive_pixel_count.html#Parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#histomicstk.segmentation.positive_pixel_count.Parameters" title="histomicstk.segmentation.positive_pixel_count.Parameters"><code class="xref py py-class docutils literal"><span class="pre">histomicstk.segmentation.positive_pixel_count.Parameters</span></code></a></p>
+<p>Parameters(hue_value, hue_width, saturation_minimum,
+intensity_upper_limit, intensity_weak_threshold,
+intensity_strong_threshold, intensity_lower_limit)</p>
+<dl class="attribute">
+<dt id="histomicstk.segmentation.positive_pixel_count.Parameters.hue_value">
+<code class="descname">hue_value</code><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Parameters.hue_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Center of the hue range in HSI space for the positive color, in
+the range [0, 1]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="histomicstk.segmentation.positive_pixel_count.Parameters.hue_width">
+<code class="descname">hue_width</code><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Parameters.hue_width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Width of the hue range in HSI space</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="histomicstk.segmentation.positive_pixel_count.Parameters.saturation_minimum">
+<code class="descname">saturation_minimum</code><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Parameters.saturation_minimum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum saturation of positive pixels in HSI space, in the range
+[0, 1]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="histomicstk.segmentation.positive_pixel_count.Parameters.intensity_upper_limit">
+<code class="descname">intensity_upper_limit</code><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Parameters.intensity_upper_limit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Intensity threshold in HSI space above which a pixel is
+considered negative, in the range [0, 1]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="histomicstk.segmentation.positive_pixel_count.Parameters.intensity_weak_threshold">
+<code class="descname">intensity_weak_threshold</code><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Parameters.intensity_weak_threshold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Intensity threshold in HSI space that separates weak-positive
+pixels (above) from plain positive pixels (below)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="histomicstk.segmentation.positive_pixel_count.Parameters.intensity_strong_threshold">
+<code class="descname">intensity_strong_threshold</code><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Parameters.intensity_strong_threshold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Intensity threshold in HSI space that separates plain positive
+pixels (above) from strong positive pixels (below)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="histomicstk.segmentation.positive_pixel_count.Parameters.intensity_lower_limit">
+<code class="descname">intensity_lower_limit</code><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Parameters.intensity_lower_limit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Intensity threshold in HSI space below which a pixel is
+considered negative</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="histomicstk.segmentation.positive_pixel_count.Output">
+<em class="property">class </em><code class="descclassname">histomicstk.segmentation.positive_pixel_count.</code><code class="descname">Output</code><span class="sig-paren">(</span><em>NumberWeakPositive</em>, <em>NumberPositive</em>, <em>NumberStrongPositive</em>, <em>IntensitySumWeakPositive</em>, <em>IntensitySumPositive</em>, <em>IntensitySumStrongPositive</em>, <em>IntensityAverage</em>, <em>RatioStrongToTotal</em>, <em>IntensityAverageWeakAndPositive</em><span class="sig-paren">)</span><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">tuple</span></code></p>
+<dl class="attribute">
+<dt id="histomicstk.segmentation.positive_pixel_count.Output.IntensityAverage">
+<code class="descname">IntensityAverage</code><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Output.IntensityAverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 6</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="histomicstk.segmentation.positive_pixel_count.Output.IntensityAverageWeakAndPositive">
+<code class="descname">IntensityAverageWeakAndPositive</code><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Output.IntensityAverageWeakAndPositive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 8</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="histomicstk.segmentation.positive_pixel_count.Output.IntensitySumPositive">
+<code class="descname">IntensitySumPositive</code><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Output.IntensitySumPositive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="histomicstk.segmentation.positive_pixel_count.Output.IntensitySumStrongPositive">
+<code class="descname">IntensitySumStrongPositive</code><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Output.IntensitySumStrongPositive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 5</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="histomicstk.segmentation.positive_pixel_count.Output.IntensitySumWeakPositive">
+<code class="descname">IntensitySumWeakPositive</code><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Output.IntensitySumWeakPositive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="histomicstk.segmentation.positive_pixel_count.Output.NumberPositive">
+<code class="descname">NumberPositive</code><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Output.NumberPositive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="histomicstk.segmentation.positive_pixel_count.Output.NumberStrongPositive">
+<code class="descname">NumberStrongPositive</code><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Output.NumberStrongPositive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="histomicstk.segmentation.positive_pixel_count.Output.NumberWeakPositive">
+<code class="descname">NumberWeakPositive</code><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Output.NumberWeakPositive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="histomicstk.segmentation.positive_pixel_count.Output.RatioStrongToTotal">
+<code class="descname">RatioStrongToTotal</code><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.Output.RatioStrongToTotal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 7</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.segmentation.positive_pixel_count.count_slide">
+<code class="descclassname">histomicstk.segmentation.positive_pixel_count.</code><code class="descname">count_slide</code><span class="sig-paren">(</span><em>slide_path</em>, <em>params</em>, <em>region=None</em>, <em>tile_grouping=256</em>, <em>make_label_image=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/segmentation/positive_pixel_count.html#count_slide"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.count_slide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute a count of positive pixels in the slide at slide_path.
+This routine can also create a label image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>slide_path</strong> (<a class="reference external" href="https://docs.python.org/2/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a><em> (</em><em>path</em><em>)</em>) – Path to the slide to analyze.</li>
+<li><strong>params</strong> (<a class="reference internal" href="#histomicstk.segmentation.positive_pixel_count.Parameters" title="histomicstk.segmentation.positive_pixel_count.Parameters"><em>Parameters</em></a>) – An instance of Parameters, which see for further documentation</li>
+<li><strong>region</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em>, </em><em>optional</em>) – A valid region dict (per a large_image
+TileSource.tileIterator’s region argument)</li>
+<li><strong>tile_grouping</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – The number of tiles to process as part of a single task</li>
+<li><strong>make_label_image</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>default=False</em>) – Whether to make a label image.  See also “Notes”</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>stats</strong> (<em>Output</em>) – Various statistics on the input image.  See Output.</li>
+<li><strong>label_image</strong> (<em>array-like, only if make_label_image is set</em>)</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The return value is either a single or a pair – it is in either
+case a tuple.  Dask is used as configured to compute the
+statistics, but only if make_label_image is reset.  If
+make_label_image is set, everything is computed in a
+single-threaded manner.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.segmentation.positive_pixel_count.count_image">
+<code class="descclassname">histomicstk.segmentation.positive_pixel_count.</code><code class="descname">count_image</code><span class="sig-paren">(</span><em>image</em>, <em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/segmentation/positive_pixel_count.html#count_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.segmentation.positive_pixel_count.count_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count positive pixels, computing a label mask and summary
+statistics.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> (<em>array-like</em>) – NxMx3 array of RGB data</li>
+<li><strong>params</strong> (<a class="reference internal" href="#histomicstk.segmentation.positive_pixel_count.Parameters" title="histomicstk.segmentation.positive_pixel_count.Parameters"><em>Parameters</em></a>) – An instance of Parameters, which see for further documentation</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>stats</strong> (<em>Output</em>) – Various statistics on the input image.  See Output.</li>
+<li><strong>label_image</strong> (<em>array-like</em>) – NxM array of pixel types.  See Labels for the different values.</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="histomicstk.features.html" class="btn btn-neutral float-right" title="histomicstk.features" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="histomicstk.segmentation.nuclear.html" class="btn btn-neutral" title="histomicstk.segmentation.nuclear" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Kitware, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

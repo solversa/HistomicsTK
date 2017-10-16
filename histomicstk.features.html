@@ -1,0 +1,962 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>histomicstk.features &mdash; HistomicsTK 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="HistomicsTK 0.1.0 documentation" href="index.html"/>
+        <link rel="up" title="histomicstk" href="histomicstk.html"/>
+        <link rel="next" title="Examples" href="examples.html"/>
+        <link rel="prev" title="histomicstk.segmentation.positive_pixel_count" href="histomicstk.segmentation.positive_pixel_count.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> HistomicsTK
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api-docs.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="histomicstk.html">histomicstk</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="histomicstk.utils.html">utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="histomicstk.preprocessing.html">preprocessing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="histomicstk.filters.html">filters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="histomicstk.segmentation.html">segmentation</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HistomicsTK</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api-docs.html">API Documentation</a> &raquo;</li>
+        
+          <li><a href="histomicstk.html">histomicstk</a> &raquo;</li>
+        
+      <li>histomicstk.features</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/histomicstk.features.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="module-histomicstk.features">
+<span id="histomicstk-features"></span><h1>histomicstk.features<a class="headerlink" href="#module-histomicstk.features" title="Permalink to this headline">¶</a></h1>
+<p>This package contains functions to computing a variety of image-based features
+that quantify the appearance and/or morphology of an objects/regions in the
+image. These are needed for classifying objects (e.g. nuclei) and
+regions (e.g. tissues) found in histopathology images.</p>
+<dl class="function">
+<dt id="histomicstk.features.compute_fsd_features">
+<code class="descclassname">histomicstk.features.</code><code class="descname">compute_fsd_features</code><span class="sig-paren">(</span><em>im_label</em>, <em>K=128</em>, <em>Fs=6</em>, <em>Delta=8</em>, <em>rprops=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/features/compute_fsd_features.html#compute_fsd_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.features.compute_fsd_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates <cite>Fourier shape descriptors</cite> for each objects.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>im_label</strong> (<em>array_like</em>) – A labeled mask image wherein intensity of a pixel is the ID of the
+object it belongs to. Non-zero values are considered to be foreground
+objects.</li>
+<li><strong>K</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – Number of points for boundary resampling to calculate fourier
+descriptors. Default value = 128.</li>
+<li><strong>Fs</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – Number of frequency bins for calculating FSDs. Default value = 6.</li>
+<li><strong>Delta</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – Used to dilate nuclei and define cytoplasm region. Default value = 8.</li>
+<li><strong>rprops</strong> (<em>output of skimage.measure.regionprops</em><em>, </em><em>optional</em>) – rprops = skimage.measure.regionprops( im_label ). If rprops is not
+passed then it will be computed inside which will increase the
+computation time.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fdata</strong> – object/label.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Pandas data frame containing the FSD features for each</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>D. Zhang et al. “A comparative study on shape retrieval using
+Fourier descriptors with different shape signatures,” In Proc.
+ICIMADE01, 2001.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.features.compute_global_cell_graph_features">
+<code class="descclassname">histomicstk.features.</code><code class="descname">compute_global_cell_graph_features</code><span class="sig-paren">(</span><em>centroids</em>, <em>neighbor_distances=array([ 10.</em>, <em>20.</em>, <em>30.</em>, <em>40.</em>, <em>50.])</em>, <em>neighbor_counts=(3</em>, <em>5</em>, <em>7)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/features/compute_global_cell_graph_features.html#compute_global_cell_graph_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.features.compute_global_cell_graph_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute global (i.e., not per-nucleus) features of the nuclei with
+the given centroids based on the partitioning of the space into
+Voronoi cells and on the induced graph structure.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>centroids</strong> (<em>array_like</em>) – Nx2 numpy array of nuclear centroids</li>
+<li><strong>neighbor_distances</strong> (<em>array_like</em>) – Radii to count neighbors in</li>
+<li><strong>neighbor_counts</strong> (<em>sequence</em>) – Sequence of numbers of neighbors, each of which is used to
+compute statistics relating to the distance required to reach
+that many neighbors.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>props</strong> – A single-row DataFrame with the following columns:</p>
+<ul class="simple">
+<li>voronoi_…: Voronoi diagram features<ul>
+<li>area_…: Polygon area features</li>
+<li>peri_…: Polygon perimeter features</li>
+<li>max_dist_…: Maximum distance in polygon features</li>
+</ul>
+</li>
+<li>delaunay_…: Delaunay triangulation features<ul>
+<li>sides_…: Triangle side length features</li>
+<li>area_…: Triangle area features</li>
+</ul>
+</li>
+<li>mst_branches_…: Minimum spanning tree branch features</li>
+<li>density_…: Density features<ul>
+<li>neighbors_in_distance_…<ul>
+<li>0, 1, …, len(neighbor_distances) - 1: Neighbor count
+within given radius features.</li>
+</ul>
+</li>
+<li>distance_for_neighbors_…<ul>
+<li>0, 1, …, len(neighbor_counts) - 1: Minimum distance to
+enclose count neighbors features</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>The “…”s are meant to signify that what precedes is the
+start of a column name.  At the end of each column name is one
+of ‘mean’, ‘stddev’, ‘min_max_ratio’, and ‘disorder’.
+‘min_max_ratio’ is the minimum-to-maximum ratio, and disorder
+is stddev / (mean + stddev).</p>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas.DataFrame</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The indices for the density features are with respect to the
+<em>sorted</em> values of the corresponding argument sequence.</p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>Doyle, S., Agner, S., Madabhushi, A., Feldman, M., &amp; Tomaszewski, J.
+(2008, May).  Automated grading of breast cancer histopathology using
+spectral clustering with textural and architectural image features.
+In Biomedical Imaging: From Nano to Macro, 2008.  ISBI 2008.
+5th IEEE International Symposium on (pp. 496-499).  IEEE.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.features.compute_gradient_features">
+<code class="descclassname">histomicstk.features.</code><code class="descname">compute_gradient_features</code><span class="sig-paren">(</span><em>im_label</em>, <em>im_intensity</em>, <em>num_hist_bins=10</em>, <em>rprops=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/features/compute_gradient_features.html#compute_gradient_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.features.compute_gradient_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates gradient features from an intensity image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>im_label</strong> (<em>array_like</em>) – A labeled mask image wherein intensity of a pixel is the ID of the
+object it belongs to. Non-zero values are considered to be foreground
+objects.</li>
+<li><strong>im_intensity</strong> (<em>array_like</em>) – Intensity image</li>
+<li><strong>num_hist_bins</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – Number of bins used to computed the gradient histogram of an object.
+Histogram is used to energy and entropy features. Default is 10.</li>
+<li><strong>rprops</strong> (<em>output of skimage.measure.regionprops</em><em>, </em><em>optional</em>) – rprops = skimage.measure.regionprops( im_label ). If rprops is not
+passed then it will be computed inside which will increase the
+computation time.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fdata</strong> – A pandas dataframe containing the gradient features listed below for
+each object/label.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas.DataFrame</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>List of gradient features computed by this function:</p>
+<dl class="docutils">
+<dt>Gradient.Mag.Mean <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Mean of gradient data.</dd>
+<dt>Gradient.Mag.Std <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Standard deviation of gradient data.</dd>
+<dt>Gradient.Mag.Skewness <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Skewness of gradient data. Value is 0 when all values are equal.</dd>
+<dt>Gradient.Mag.Kurtosis <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Kurtosis of gradient data. Value is -3 when all values are equal.</dd>
+<dt>Gradient.Mag.HistEnergy <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Energy of the gradient magnitude histogram of object pixels</dd>
+<dt>Gradient.Mag.HistEnergy <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Entropy of the gradient magnitude histogram of object pixels.</dd>
+<dt>Gradient.Canny.Sum <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Sum of canny filtered gradient data.</dd>
+<dt>Gradient.Canny.Mean <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Mean of canny filtered gradient data.</dd>
+</dl>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>Daniel Zwillinger and Stephen Kokoska. “CRC standard probability
+and statistics tables and formulae,” Crc Press, 1999.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.features.compute_haralick_features">
+<code class="descclassname">histomicstk.features.</code><code class="descname">compute_haralick_features</code><span class="sig-paren">(</span><em>im_label</em>, <em>im_intensity</em>, <em>offsets=None</em>, <em>num_levels=None</em>, <em>gray_limits=None</em>, <em>rprops=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/features/compute_haralick_features.html#compute_haralick_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.features.compute_haralick_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates 26 Haralick texture features for each object in the given label
+mask.</p>
+<p>These features are derived from gray-level co-occurence matrix (GLCM)
+that is a two dimensional histogram containing the counts/probabilities of
+co-occurring intensity values with a given neighborhood offset in the
+region occupied by an object in the image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>im_label</strong> (<em>array_like</em>) – An ND labeled mask image wherein intensity of a pixel is the ID of the
+object it belongs to. Non-zero values are considered to be foreground
+objects.</li>
+<li><strong>im_intensity</strong> (<em>array_like</em>) – An ND single channel intensity image</li>
+<li><strong>offsets</strong> (<em>array_like</em><em>, </em><em>optional</em>) – <p>A (num_offsets, num_image_dims) array of offset vectors
+specifying the distance between the pixel-of-interest and
+its neighbor. Note that the first dimension corresponds to
+the rows.</p>
+<p>See <cite>histomicstk.features.graycomatrixext</cite> for more details.</p>
+</li>
+<li><strong>num_levels</strong> (<em>unsigned int</em><em>, </em><em>optional</em>) – <p>An integer specifying the number of gray levels For example, if
+<cite>NumLevels</cite> is 8,  the intensity values of the input image are
+scaled so they are integers between 1 and 8.  The number of gray
+levels determines the size of the gray-level co-occurrence matrix.</p>
+<p>Default: 2 for binary/logical image, 32 for numeric image</p>
+</li>
+<li><strong>gray_limits</strong> (<em>array_like</em><em>, </em><em>optional</em>) – <p>A two-element array specifying the desired input intensity range.
+Intensity values in the input image will be clipped into this range.</p>
+<p>Default: [0, 1] for boolean-valued image, [0, 255] for integer-valued
+image, and [0.0, 1.0] for-real valued image</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fdata</strong> – A pandas dataframe containing the haralick features.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas.DataFrame</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This function computes the following list of haralick features derived
+from normalized GLCMs (P) of the given list of neighborhood offsets:</p>
+<dl class="docutils">
+<dt>Haralick.ASM.Mean, Haralick.ASM.Range <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first">Mean and range of the angular second moment (ASM) feature for GLCMS
+of all offsets. It is a measure of image homogeneity and is computed
+as follows:</p>
+<div class="last math">
+\[ASM = \sum_{i,j=0}^{levels-1} p(i,j)^2\]</div>
+</dd>
+<dt>Haralick.Contrast.Mean, Haralick.Contrast.Range <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first">Mean and range of the Contrast feature for GLCMs of all offsets. It is
+a measure of the amount of variation between intensities of
+neighboiring pixels. It is equal to zero for a constant image and
+increases as the amount of variation increases. It is computed as
+follows:</p>
+<div class="last math">
+\[Contrast = \sum_{i,j=0}^{levels-1}  (i-j)^2 p(i,j)\]</div>
+</dd>
+<dt>Haralick.Correlation.Mean, Haralick.Correlation.Range <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first">Mean and range of the Correlation feature for GLCMs of all offsets. It
+is a measure of correlation between the intensity values of
+neighboring pixels. It is computed as follows:</p>
+<div class="last math">
+\[Correlation =
+\sum_{i,j=0}^{levels-1} p(i,j)\left[\frac{(i-\mu_i)
+(j-\mu_j)}{\sigma_i \sigma_j}\right]\]</div>
+</dd>
+<dt>Haralick.SumOfSquares.Mean, Haralick.SumOfSquares.Range <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first">Mean and range of the SumOfSquares feature for GLCMs of all offsets.
+It is a measure of variance and is computed as follows:</p>
+<div class="last math">
+\[SumofSquare =
+\sum_{i,j=0}^{levels-1} (i - \mu)^2 p(i,j)\]</div>
+</dd>
+<dt>Haralick.IDM.Mean, Haralick.IDM.Range <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first">Mean and range of the inverse difference moment (IDM) feature for
+GLCMS of all offsets. It is a measure of homogeneity and is computed
+as follows:</p>
+<div class="last math">
+\[IDM = \sum_{i,j=0}^{levels-1} \frac{1}{1 + (i - j)^2} p(i,j)\]</div>
+</dd>
+<dt>Haralick.SumAverage.Mean, Haralick.SumAverage.Range <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first">Mean and range of sum average feature for GLCMs of all offsets.
+It is computed as follows:</p>
+<div class="last math">
+\[ \begin{align}\begin{aligned}\begin{split}SumAverage = \sum_{k=2}^{2 levels} k p_{x+y}(k), \qquad where \\\end{split}\\\begin{split}p_{x+y}(k) =
+\sum_{i,j=0}^{levels-1} \delta_{i+j, k} p(i,j) \\\end{split}\\\begin{split}\delta_{m,n} = \left\{
+\begin{array}{11}
+    1 &amp; {\rm when ~} m=n \\
+    0 &amp; {\rm when ~} m \ne n
+\end{array}
+\right.\end{split}\end{aligned}\end{align} \]</div>
+</dd>
+<dt>Haralick.SumVariance.Mean, Haralick.SumVariance.Variance <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first">Mean and range of sum variance feature for the GLCMS of all offsets.
+It is computed as follows:</p>
+<div class="last math">
+\[SumVariance =
+\sum_{k=2}^{2 levels} (k - SumEntropy) p_{x+y}(k)\]</div>
+</dd>
+<dt>Haralick.SumEntropy.Mean <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first">Mean and range of the sum entropy features for GLCMS of all offsets.
+It is computed as follows:</p>
+<div class="last math">
+\[SumEntropy =
+- \sum_{k=2}^{2 levels} p_{x+y}(k) \log(p_{x+y}(k))\]</div>
+</dd>
+<dt>Haralick.Entropy.Mean, Haralick.Entropy.Range <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first">Mean and range of the entropy features for GLCMs of all offsets.
+It is computed as follows:</p>
+<div class="last math">
+\[Entropy = - \sum_{i,j=0}^{levels-1} p(i,j) \log(p(i,j))\]</div>
+</dd>
+<dt>Haralick.DifferenceVariance.Mean, Haralick.DifferenceVariance.Range <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first">Mean and Range of the difference variance feature of GLCMs of all
+offsets. It is computed as follows:</p>
+<div class="last math">
+\[ \begin{align}\begin{aligned}\begin{split}DifferenceVariance = {\rm variance \ of ~} p_{x-y}, \qquad where \\\end{split}\\p_{x-y}(k) =
+\sum_{i,j=0}^{levels-1} \delta_{|i-j|, k} p(i,j)\end{aligned}\end{align} \]</div>
+</dd>
+<dt>Haralick.DifferenceEntropy.Mean <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first">Mean and range of the difference entropy feature for GLCMS of all
+offsets. It is computed as follows:</p>
+<div class="last math">
+\[DifferenceEntropy = {\rm entropy \ of ~} p_{x-y}\]</div>
+</dd>
+<dt>Haralick.IMC1.Mean, Haralick.IMC1.Range <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first">Mean and range of the first information measure of correlation
+feature for GLCMs of all offsets. It is computed as follows:</p>
+<div class="last math">
+\[ \begin{align}\begin{aligned}\begin{split}IMC1 = \frac{HXY - HXY1}{\max(HX,HY)}, \qquad where \\\end{split}\\\begin{split}HXY = -\sum_{i,j=0}^{levels-1} p(i,j) \log(p(i,j)) \\\end{split}\\\begin{split}HXY1 = -\sum_{i,j=0}^{levels-1} p(i,j) \log(p_x(i) p_y(j)) \\\end{split}\\\begin{split}HX = -\sum_{i=0}^{levels-1} p_x(i) \log(p_x(i))    \\\end{split}\\\begin{split}HY = -\sum_{j=0}^{levels-1} p_y(j) \log(p_y(j))    \\\end{split}\\\begin{split}p_x(i) = \sum_{j=1}^{levels} p(i,j) \\\end{split}\\p_y(j) = \sum_{j=1}^{levels} p(i,j)\end{aligned}\end{align} \]</div>
+</dd>
+<dt>Haralick.IMC2.Mean, Haralick.IMC2.Range <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first">Mean and range of the second information measure of correlation
+feature for GLCMs of all offsets. It is computed as follows:</p>
+<div class="last math">
+\[ \begin{align}\begin{aligned}\begin{split}IMC2 = [1 - \exp(-2(HXY2 - HXY))]^{1/2}, \qquad where \\\end{split}\\HXY2 = -\sum_{i,j=0}^{levels-1} p_x(i) p_y(j) \log(p_x(i) p_y(j))\end{aligned}\end{align} \]</div>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td>Haralick, et al. “Textural features for image classification,”
+IEEE Transactions on Systems, Man, and Cybernatics, vol. 6,
+pp: 610-621, 1973.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[5]</td><td>Luis Pedro Coelho. “Mahotas: Open source software for scriptable
+computer vision,” Journal of Open Research Software, vol 1, 2013.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.features.compute_intensity_features">
+<code class="descclassname">histomicstk.features.</code><code class="descname">compute_intensity_features</code><span class="sig-paren">(</span><em>im_label</em>, <em>im_intensity</em>, <em>num_hist_bins=10</em>, <em>rprops=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/features/compute_intensity_features.html#compute_intensity_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.features.compute_intensity_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates intensity features from an intensity image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>im_label</strong> (<em>array_like</em>) – A labeled mask image wherein intensity of a pixel is the ID of the
+object it belongs to. Non-zero values are considered to be foreground
+objects.</li>
+<li><strong>im_intensity</strong> (<em>array_like</em>) – Intensity image.</li>
+<li><strong>num_hist_bins</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – Number of bins used to computed the intensity histogram of an object.
+Histogram is used to energy and entropy features. Default is 10.</li>
+<li><strong>rprops</strong> (<em>output of skimage.measure.regionprops</em><em>, </em><em>optional</em>) – rprops = skimage.measure.regionprops( im_label ). If rprops is not
+passed then it will be computed inside which will increase the
+computation time.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fdata</strong> – A pandas dataframe containing the intensity features listed below for
+each object/label.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas.DataFrame</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>List of intensity features computed by this function:</p>
+<dl class="docutils">
+<dt>Intensity.Min <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Minimum intensity of object pixels.</dd>
+<dt>Intensity.Max <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Maximum intensity of object pixels.</dd>
+<dt>Intensity.Mean <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Mean intensity of object pixels</dd>
+<dt>Intensity.Median <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Median intensity of object pixels</dd>
+<dt>Intensity.MeanMedianDiff <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Difference between mean and median intensities of object pixels.</dd>
+<dt>Intensity.Std <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Standard deviation of the intensities of object pixels</dd>
+<dt>Intensity.IQR: float</dt>
+<dd>Inter-quartile range of the intensities of object pixels</dd>
+<dt>Intensity.MAD: float</dt>
+<dd>Median absolute deviation of the intensities of object pixels</dd>
+<dt>Intensity.Skewness <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Skewness of the intensities of object pixels. Value is 0 when all
+intensity values are equal.</dd>
+<dt>Intensity.Kurtosis <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Kurtosis of the intensities of object pixels. Value is -3 when all
+values are equal.</dd>
+<dt>Intensity.HistEnergy <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Energy of the intensity histogram of object pixels</dd>
+<dt>Intensity.HistEntropy <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Entropy of the intensity histogram of object pixels.</dd>
+</dl>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[6]</td><td>Daniel Zwillinger and Stephen Kokoska. “CRC standard probability
+and statistics tables and formulae,” Crc Press, 1999.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.features.compute_morphometry_features">
+<code class="descclassname">histomicstk.features.</code><code class="descname">compute_morphometry_features</code><span class="sig-paren">(</span><em>im_label</em>, <em>rprops=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/features/compute_morphometry_features.html#compute_morphometry_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.features.compute_morphometry_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates morphometry features for each object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>im_label</strong> (<em>array_like</em>) – A labeled mask image wherein intensity of a pixel is the ID of the
+object it belongs to. Non-zero values are considered to be foreground
+objects.</li>
+<li><strong>rprops</strong> (<em>output of skimage.measure.regionprops</em><em>, </em><em>optional</em>) – rprops = skimage.measure.regionprops( im_label ). If rprops is not
+passed then it will be computed inside which will increase the
+computation time.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fdata</strong> – A pandas dataframe containing the morphometry features for each
+object/label listed below.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas.DataFrame</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>List of morphometry features computed by this function:</p>
+<dl class="docutils">
+<dt>Size.Area <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd>Number of pixels the object occupies.</dd>
+<dt>Size.MajorAxisLength <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The length of the major axis of the ellipse that has the same
+normalized second central moments as the object.</dd>
+<dt>Size.MinorAxisLength <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The length of the minor axis of the ellipse that has the same
+normalized second central moments as the region.</dd>
+<dt>Size.Perimeter <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Perimeter of object which approximates the contour as a line
+through the centers of border pixels using a 4-connectivity.</dd>
+<dt>Shape.Circularity: float</dt>
+<dd>A measure of how similar the shape of an object is to the circle</dd>
+<dt>Shape.Eccentricity <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>A measure of aspect ratio computed to be the eccentricity of the
+ellipse that has the same second-moments as the object region.
+Eccentricity of an ellipse is the ratio of the focal distance
+(distance between focal points) over the major axis length. The value
+is in the interval [0, 1). When it is 0, the ellipse becomes a circle.</dd>
+<dt>Shape.EquivalentDiameter <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The diameter of a circle with the same area as the object.</dd>
+<dt>Shape.Extent <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Ratio of area of the object to its axis-aligned bounding box.</dd>
+<dt>Shape.MinorMajorAxisRatio <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>A measure of aspect ratio. Ratio of minor to major axis of the ellipse
+that has the same second-moments as the object region</dd>
+<dt>Shape.Solidity <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>A measure of convexity computed as the ratio of the number of pixels
+in the object to that of its convex hull.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.features.compute_nuclei_features">
+<code class="descclassname">histomicstk.features.</code><code class="descname">compute_nuclei_features</code><span class="sig-paren">(</span><em>im_label</em>, <em>im_nuclei</em>, <em>im_cytoplasm=None</em>, <em>fsd_bnd_pts=128</em>, <em>fsd_freq_bins=6</em>, <em>cyto_width=8</em>, <em>num_glcm_levels=32</em>, <em>morphometry_features_flag=True</em>, <em>fsd_features_flag=True</em>, <em>intensity_features_flag=True</em>, <em>gradient_features_flag=True</em>, <em>haralick_features_flag=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/features/compute_nuclei_features.html#compute_nuclei_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.features.compute_nuclei_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates features for nuclei classification</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>im_label</strong> (<em>array_like</em>) – A labeled mask image wherein intensity of a pixel is the ID of the
+object it belongs to. Non-zero values are considered to be foreground
+objects.</li>
+<li><strong>im_nuclei</strong> (<em>array_like</em>) – Nucleus channel intensity image.</li>
+<li><strong>im_cytoplasm</strong> (<em>array_like</em>) – Cytoplasm channel intensity image.</li>
+<li><strong>fsd_bnd_pts</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – Number of points for boundary resampling to calculate fourier
+descriptors. Default value = 128.</li>
+<li><strong>fsd_freq_bins</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – Number of frequency bins for calculating FSDs. Default value = 6.</li>
+<li><strong>cyto_width</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, </em><em>optional</em>) – Estimated width of the ring-like neighborhood region around each
+nucleus to be considered as its cytoplasm. Default value = 8.</li>
+<li><strong>num_glcm_levels</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><em>optional</em>) – <p>An integer specifying the number of gray levels For example, if
+<cite>NumLevels</cite> is 32,  the intensity values of the input image are
+scaled so they are integers between 0 and 31.  The number of gray
+levels determines the size of the gray-level co-occurrence matrix.</p>
+<p>Default: 32</p>
+</li>
+<li><strong>morphometry_features_flag</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) – A flag that can be used to specify whether or not to compute
+morphometry (size and shape) features.
+See histomicstk.features.compute_morphometry_features for more details.</li>
+<li><strong>fsd_features_flag</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) – A flag that can be used to specify whether or not to compute
+Fouried shape descriptor (FSD) features.
+See <cite>histomicstk.features.compute_fsd_features</cite> for more details.</li>
+<li><strong>intensity_features_flag</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) – A flag that can be used to specify whether or not to compute
+intensity features from the nucleus and cytoplasm channels.
+See <cite>histomicstk.features.compute_fsd_features</cite> for more details.</li>
+<li><strong>gradient_features_flag</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) – A flag that can be used to specify whether or not to compute
+gradient/edge features from intensity and cytoplasm channels.
+See <cite>histomicstk.features.compute_gradient_features</cite> for more details.</li>
+<li><strong>haralick_features_flag</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) – A flag that can be used to specify whether or not to compute
+haralick features from intensity and cytoplasm channels.
+See <cite>histomicstk.features.compute_haralick_features</cite> for more details.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fdata</strong> – A pandas data frame containing the features listed below for each
+object/label</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas.DataFrame</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>List of features computed by this function</p>
+<dl class="docutils">
+<dt>Morphometry (size and shape) features of the nuclei</dt>
+<dd>See histomicstk.features.compute_morphometry_features for more details.
+Feature names prefixed by <em>Size.</em> or <em>Shape.</em>.</dd>
+<dt>Fourier shape descriptor features</dt>
+<dd>See <cite>histomicstk.features.compute_fsd_features</cite> for more details.
+Feature names are prefixed by <em>FSD</em>.</dd>
+<dt>Intensity features for the nucleus and cytoplasm channels</dt>
+<dd>See <cite>histomicstk.features.compute_fsd_features</cite> for more details.
+Feature names are prefixed by <em>Nucleus.Intensity.</em> for nucleus features
+and <em>Cytoplasm.Intensity.</em> for cytoplasm features.</dd>
+<dt>Gradient/edge features for the nucleus and cytoplasm channels</dt>
+<dd>See <cite>histomicstk.features.compute_gradient_features</cite> for more details.
+Feature names are prefixed by <em>Nucleus.Gradient.</em> for nucleus features
+and <em>Cytoplasm.Gradient.</em> for cytoplasm features.</dd>
+<dt>Haralick features for the nucleus and cytoplasm channels</dt>
+<dd>See <cite>histomicstk.features.compute_haralick_features</cite> for more details.
+Feature names are prefixed by <em>Nucleus.Haralick.</em> for nucleus features
+and <em>Cytoplasm.Haralick.</em> for cytoplasm features.</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#histomicstk.features.compute_morphometry_features" title="histomicstk.features.compute_morphometry_features"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.features.compute_morphometry_features()</span></code></a>, <a class="reference internal" href="#histomicstk.features.compute_fsd_features" title="histomicstk.features.compute_fsd_features"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.features.compute_fsd_features()</span></code></a>, <a class="reference internal" href="#histomicstk.features.compute_intensity_features" title="histomicstk.features.compute_intensity_features"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.features.compute_intensity_features()</span></code></a>, <a class="reference internal" href="#histomicstk.features.compute_gradient_features" title="histomicstk.features.compute_gradient_features"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.features.compute_gradient_features()</span></code></a>, <a class="reference internal" href="#histomicstk.features.compute_haralick_features" title="histomicstk.features.compute_haralick_features"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.features.compute_haralick_features()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.features.graycomatrixext">
+<code class="descclassname">histomicstk.features.</code><code class="descname">graycomatrixext</code><span class="sig-paren">(</span><em>im_input</em>, <em>im_roi_mask=None</em>, <em>offsets=None</em>, <em>num_levels=None</em>, <em>gray_limits=None</em>, <em>symmetric=False</em>, <em>normed=False</em>, <em>exclude_boundary=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/features/graycomatrixext.html#graycomatrixext"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.features.graycomatrixext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes gray-level co-occurence matrix (GLCM) within a region of
+interest (ROI) of an image. GLCM is a 2D histogram/matrix containing the
+counts/probabilities of co-occuring intensity values at a given offset
+within an ROI of an image.</p>
+<p>Read the documentation to know the default values used for each of the
+optional parameter in different scenarios.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>im_input</strong> (<em>array_like</em>) – Input single channel intensity image</li>
+<li><strong>im_roi_mask</strong> (<em>array_like</em><em>, </em><em>optional</em>) – <p>A binary mask specifying the region of interest within which
+to compute the GLCM. If not specified GLCM is computed for the
+the entire image.</p>
+<p>Default: None</p>
+</li>
+<li><strong>offsets</strong> (<em>array_like</em><em>, </em><em>optional</em>) – <p>A (num_offsets, num_image_dims) array of offset vectors
+specifying the distance between the pixel-of-interest and
+its neighbor. Note that the first dimension corresponds to
+the rows.</p>
+<p>Because this offset is often expressed as an angle, the
+following table lists the offset values that specify common
+angles for a 2D image, given the pixel distance D.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Angle (deg)</th>
+<th class="head">offset [y, x]</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>[0 D]</td>
+</tr>
+<tr class="row-odd"><td>45</td>
+<td>[-D D]</td>
+</tr>
+<tr class="row-even"><td>90</td>
+<td>[-D 0]</td>
+</tr>
+<tr class="row-odd"><td>135</td>
+<td>[-D -D]</td>
+</tr>
+</tbody>
+</table>
+<p>Default
+- 1D: np.array([1])
+- 2D : numpy.array([ [1, 0], [0, 1], [1, 1], [1, -1] ])
+- 3D and higher: numpy.identity(num_image_dims)</p>
+</li>
+<li><strong>num_levels</strong> (<em>unsigned int</em><em>, </em><em>optional</em>) – <p>An integer specifying the number of gray levels For example, if
+<cite>NumLevels</cite> is 8,  the intensity values of the input image are
+scaled so they are integers between 1 and 8.  The number of gray
+levels determines the size of the gray-level co-occurrence matrix.</p>
+<p>Default: 2 for binary/logical image, 32 for numeric image</p>
+</li>
+<li><strong>gray_limits</strong> (<em>array_like</em><em>, </em><em>optional</em>) – <p>A two-element array specifying the desired input intensity range.
+Intensity values in the input image will be clipped into this range.</p>
+<p>Default: [0, 1] for boolean-valued image, [0, 255] for integer-valued
+image, and [0.0, 1.0] for-real valued image</p>
+</li>
+<li><strong>symmetric</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) – <p>A boolean value that specifies whether or not the ordering of values
+in pixel pairs is considered while creating the GLCM matrix.</p>
+<p>For example, if <cite>Symmetric</cite> is True, then while calculating the
+number of times the value 1 is adjacent to the value 2, both
+1,2 and 2,1 pairings are counted. GLCM created in this way is
+symmetric across its diagonal.</p>
+<p>Default: False</p>
+</li>
+<li><strong>normed</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) – <p>A boolean value specifying whether or not to normalize glcm.</p>
+<p>Default: False</p>
+</li>
+<li><strong>exclude_boundary</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a><em>, </em><em>optional</em>) – <p>Specifies whether or not to exclude a pixel-pair if the
+neighboring pixel in the pair is outside <cite>im_roi_mask</cite>.
+Has an effect only when <cite>im_roi_mask</cite> is specified.</p>
+<p>Default: False</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>glcm</strong> – num_levels x num_levels x num_offsets array containing the GLCM
+for each offset.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array_like</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[7]</td><td>Haralick, R.M., K. Shanmugan, and I. Dinstein, “Textural Features
+for Image Classification”, IEEE Transactions on Systems, Man, and
+Cybernetics, Vol. SMC-3, 1973, pp. 610-621.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[8]</td><td>Haralick, R.M., and L.G. Shapiro. Computer and Robot Vision:
+Vol. 1, Addison-Wesley, 1992, p. 459.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="histomicstk.segmentation.positive_pixel_count.html" class="btn btn-neutral" title="histomicstk.segmentation.positive_pixel_count" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Kitware, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

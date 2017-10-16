@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>HistomicsTK &mdash; HistomicsTK 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="HistomicsTK 0.1.0 documentation" href="#"/>
+        <link rel="next" title="Installation" href="installation.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> HistomicsTK
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api-docs.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">HistomicsTK</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>HistomicsTK</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="histomicstk">
+<h1>HistomicsTK<a class="headerlink" href="#histomicstk" title="Permalink to this headline">¶</a></h1>
+<p>HistomicsTK is a Python and REST API for the analysis of Histopathology images
+in association with clinical and genomic data.</p>
+<p>Histopathology, which involves the examination of thin-slices of diseased
+tissue at a cellular resolution using a microscope, is regarded as the gold
+standard in clinical diagnosis, staging, and prognosis of several diseases
+including most types of cancer. The recent emergence and increased clinical
+adoption of whole-slide imaging systems that capture large digital images of
+an entire tissue section at a high magnification, has resulted in an explosion
+of data. Compared to the related areas of radiology and genomics, there is a
+dearth of mature open-source tools for the management, visualization and
+quantitative analysis of the massive and rapidly growing collections of
+data in the domain of digital pathology. This is precisely the gap that
+we aim to fill with the development of HistomicsTK.</p>
+<p>Developed in coordination with the <a class="reference external" href="http://github.com/DigitalSlideArchive">Digital Slide Archive</a> and
+<a class="reference external" href="https://github.com/girder/large_image">large_image</a>, HistomicsTK aims to serve the needs of both
+pathologists/biologists interested in using state-of-the-art algorithms
+to analyze their data, and algorithm researchers interested in developing
+new/improved algorithms and disseminate them for wider use by the community.</p>
+<p>HistomicsTK can be used in two ways:</p>
+<ul class="simple">
+<li><strong>As a pure Python package</strong>: This is intended to enable algorithm
+researchers to use and/or extend the analytics functionality within
+HistomicsTK in Python. HistomicsTK provides algorithms for fundamental
+image analysis tasks such as color normalization, color deconvolution,
+cell-nuclei segmentation, and feature extraction. Please see the
+<a class="reference internal" href="api-docs.html"><span class="doc">api-docs</span></a> and <a class="reference internal" href="examples.html"><span class="doc">examples</span></a> for more
+information.</li>
+<li><strong>As a server-side Girder plugin for web-based analysis</strong>: This is intended
+to allow pathologists/biologists to apply analysis modules/pipelines
+containerized in HistomicsTK’s docker plugins on data over the web. <a class="reference external" href="http://girder.readthedocs.io/en/latest/">Girder</a>
+is a Python-based framework (under active development by <a class="reference external" href="http://www.kitware.com/">Kitware</a>) for
+building web-applications that store, aggregate, and process scientific data.
+It is built on <a class="reference external" href="http://www.cherrypy.org/">CherryPy</a> and provides functionality for authentication,
+access control, customizable metadata association, easy upload/download of
+data, an abstraction layer that exposes data stored on multiple backends
+(e.g. Native file system, Amazon S3, MongoDB GridFS) through a uniform
+RESTful API, and most importantly an extensible plugin framework for
+building server-side analytics apps. To inherit all these capabilities,
+HistomicsTK is being developed to act also as a Girder plugin in addition
+to its use as a pure Python package. To further support web-based analysis,
+HistomicsTK depends on three other Girder plugins:<ul>
+<li><a class="reference external" href="http://girder-worker.readthedocs.io/en/latest/">girder_worker</a>: A Girder plugin for distributed task execution.</li>
+<li><a class="reference external" href="https://github.com/girder/large_image">large_image</a>: A Girder plugin to create/serve/display large
+multi-resolution images produced by whole-slide imaging systems and a
+stand-alone Python package for reading these images.</li>
+<li><a class="reference external" href="https://github.com/girder/slicer_cli_web">slicer_cli_web</a>: A Girder plugin for providing web-based RESTFul access
+to image analysis pipelines developed as <a class="reference external" href="https://www.slicer.org/slicerWiki/index.php/Slicer3:Execution_Model_Documentation">slicer execution model</a>
+CLIs and containerized using Docker.</li>
+</ul>
+</li>
+</ul>
+<p>This work is funded by the National Cancer Institute (NCI) grant
+<a class="reference external" href="http://grantome.com/grant/NIH/U24-CA194362-01">U24-CA194362-01</a>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installing-histomicstk-as-a-python-toolkit">Installing HistomicsTK as a Python toolkit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installing-histomicstk-as-a-server-side-girder-plugin">Installing HistomicsTK as a server-side Girder plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installing-via-docker">Installing via Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installing-via-vagrant">Installing via Vagrant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#local-installation-on-ubuntu-16-04">Local installation on Ubuntu 16.04</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api-docs.html">API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="histomicstk.html">histomicstk</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/color-deconvolution.html">Color Deconvolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/nuclei-segmentation.html">Nuclei Segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/positive-pixel-count.html">Positive Pixel Count</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#types-of-contributions">Types of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#get-started">Get Started!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#pull-request-guidelines">Pull Request Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="authors.html#development-lead">Development Lead</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authors.html#contributors">Contributors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Kitware, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,521 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>histomicstk.preprocessing.color_conversion &mdash; HistomicsTK 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="HistomicsTK 0.1.0 documentation" href="index.html"/>
+        <link rel="up" title="histomicstk.preprocessing" href="histomicstk.preprocessing.html"/>
+        <link rel="next" title="histomicstk.preprocessing.color_deconvolution" href="histomicstk.preprocessing.color_deconvolution.html"/>
+        <link rel="prev" title="histomicstk.preprocessing" href="histomicstk.preprocessing.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> HistomicsTK
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api-docs.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="histomicstk.html">histomicstk</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="histomicstk.utils.html">utils</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="histomicstk.preprocessing.html">preprocessing</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">color space conversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="histomicstk.preprocessing.color_deconvolution.html">color deconvolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="histomicstk.preprocessing.color_normalization.html">color normalization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="histomicstk.filters.html">filters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="histomicstk.segmentation.html">segmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="histomicstk.features.html">features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HistomicsTK</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api-docs.html">API Documentation</a> &raquo;</li>
+        
+          <li><a href="histomicstk.html">histomicstk</a> &raquo;</li>
+        
+          <li><a href="histomicstk.preprocessing.html">histomicstk.preprocessing</a> &raquo;</li>
+        
+      <li>histomicstk.preprocessing.color_conversion</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/histomicstk.preprocessing.color_conversion.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="module-histomicstk.preprocessing.color_conversion">
+<span id="histomicstk-preprocessing-color-conversion"></span><h1>histomicstk.preprocessing.color_conversion<a class="headerlink" href="#module-histomicstk.preprocessing.color_conversion" title="Permalink to this headline">¶</a></h1>
+<p>This package contains utility functions to convert images between different
+color spaces.</p>
+<dl class="function">
+<dt id="histomicstk.preprocessing.color_conversion.lab_mean_std">
+<code class="descclassname">histomicstk.preprocessing.color_conversion.</code><code class="descname">lab_mean_std</code><span class="sig-paren">(</span><em>im_input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/preprocessing/color_conversion/lab_mean_std.html#lab_mean_std"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.preprocessing.color_conversion.lab_mean_std" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the mean and standard deviation of the intensities of each
+channel of the given RGB image in LAB color space. The outputs of this
+function are needed for reinhard color normalization.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>im_input</strong> (<em>array_like</em>) – An RGB image</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><strong>mean_lab</strong> (<em>array_like</em>) – A 3-element array containing the mean of each channel of the input RGB
+in LAB color space.</li>
+<li><strong>std_lab</strong> (<em>array_like</em>) – A 3-element array containing the standard deviation of each channel
+of the input RGB in LAB color space.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#histomicstk.preprocessing.color_conversion.rgb_to_lab" title="histomicstk.preprocessing.color_conversion.rgb_to_lab"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_conversion.rgb_to_lab()</span></code></a>, <code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_conversion.reinhard()</span></code></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>E. Reinhard, M. Adhikhmin, B. Gooch, P. Shirley, “Color transfer
+between images,” in IEEE Computer Graphics and Applications, vol.21,
+no.5,pp.34-41, 2001.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>D. Ruderman, T. Cronin, and C. Chiao, “Statistics of cone
+responses to natural images: implications for visual coding,”
+J. Opt. Soc. Am. A vol.15, pp.2036-2045, 1998.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.preprocessing.color_conversion.lab_to_rgb">
+<code class="descclassname">histomicstk.preprocessing.color_conversion.</code><code class="descname">lab_to_rgb</code><span class="sig-paren">(</span><em>im_lab</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/preprocessing/color_conversion/lab_to_rgb.html#lab_to_rgb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.preprocessing.color_conversion.lab_to_rgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms an image from LAB to RGB color space</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>im_lab</strong> (<em>array_like</em>) – An image in LAB color space</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>im_rgb</strong> – The RGB representation of the input image ‘im_lab’.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array_like</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#histomicstk.preprocessing.color_conversion.rgb_to_lab" title="histomicstk.preprocessing.color_conversion.rgb_to_lab"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_conversion.rgb_to_lab()</span></code></a>, <a class="reference internal" href="histomicstk.preprocessing.color_normalization.html#histomicstk.preprocessing.color_normalization.reinhard" title="histomicstk.preprocessing.color_normalization.reinhard"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_normalization.reinhard()</span></code></a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>D. Ruderman, T. Cronin, and C. Chiao, “Statistics of cone
+responses to natural images: implications for visual coding,”
+J. Opt. Soc. Am. A 15, 2036-2045 (1998).</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.preprocessing.color_conversion.od_to_rgb">
+<code class="descclassname">histomicstk.preprocessing.color_conversion.</code><code class="descname">od_to_rgb</code><span class="sig-paren">(</span><em>im_od</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/preprocessing/color_conversion/od_to_rgb.html#od_to_rgb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.preprocessing.color_conversion.od_to_rgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms input optical density image <cite>im_od</cite> into RGB space</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>im_od</strong> (<em>array_like</em>) – A floating-point image of optical density values obtained
+from rgb_to_od.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>im_rgb</strong> – A floating-point multi-channel image with intensity
+values in the range [0, 255].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array_like</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#histomicstk.preprocessing.color_conversion.rgb_to_od" title="histomicstk.preprocessing.color_conversion.rgb_to_od"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_conversion.rgb_to_od()</span></code></a>, <a class="reference internal" href="#histomicstk.preprocessing.color_conversion.sda_to_rgb" title="histomicstk.preprocessing.color_conversion.sda_to_rgb"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_conversion.sda_to_rgb()</span></code></a>, <a class="reference internal" href="histomicstk.preprocessing.color_deconvolution.html#histomicstk.preprocessing.color_deconvolution.color_deconvolution" title="histomicstk.preprocessing.color_deconvolution.color_deconvolution"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_deconvolution.color_deconvolution()</span></code></a>, <a class="reference internal" href="histomicstk.preprocessing.color_deconvolution.html#histomicstk.preprocessing.color_deconvolution.color_convolution" title="histomicstk.preprocessing.color_deconvolution.color_convolution"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_deconvolution.color_convolution()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.preprocessing.color_conversion.sda_to_rgb">
+<code class="descclassname">histomicstk.preprocessing.color_conversion.</code><code class="descname">sda_to_rgb</code><span class="sig-paren">(</span><em>im_sda</em>, <em>I_0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/preprocessing/color_conversion/sda_to_rgb.html#sda_to_rgb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.preprocessing.color_conversion.sda_to_rgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform input SDA image or matrix <cite>im_sda</cite> into RGB space.  This
+is the inverse of <cite>rgb_to_sda</cite> with respect to the first parameter</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>im_sda</strong> (<em>array_like</em>) – Image (MxNx3) or matrix (3xN) of pixels</li>
+<li><strong>I_0</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> or </em><em>array_like</em>) – Background intensity, either per-channel or for all channels</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For compatibility purposes, passing I_0=None invokes the behavior of
+od_to_rgb.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#histomicstk.preprocessing.color_conversion.rgb_to_sda" title="histomicstk.preprocessing.color_conversion.rgb_to_sda"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_conversion.rgb_to_sda()</span></code></a>, <a class="reference internal" href="#histomicstk.preprocessing.color_conversion.od_to_rgb" title="histomicstk.preprocessing.color_conversion.od_to_rgb"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_conversion.od_to_rgb()</span></code></a>, <a class="reference internal" href="histomicstk.preprocessing.color_deconvolution.html#histomicstk.preprocessing.color_deconvolution.color_deconvolution" title="histomicstk.preprocessing.color_deconvolution.color_deconvolution"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_deconvolution.color_deconvolution()</span></code></a>, <a class="reference internal" href="histomicstk.preprocessing.color_deconvolution.html#histomicstk.preprocessing.color_deconvolution.color_convolution" title="histomicstk.preprocessing.color_deconvolution.color_convolution"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_deconvolution.color_convolution()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.preprocessing.color_conversion.rgb_to_hsi">
+<code class="descclassname">histomicstk.preprocessing.color_conversion.</code><code class="descname">rgb_to_hsi</code><span class="sig-paren">(</span><em>im</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/preprocessing/color_conversion/rgb_to_hsi.html#rgb_to_hsi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.preprocessing.color_conversion.rgb_to_hsi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert to HSI the RGB pixels in im.  Adapted from
+<a class="reference external" href="https://en.wikipedia.org/wiki/HSL_and_HSV#Hue_and_chroma">https://en.wikipedia.org/wiki/HSL_and_HSV#Hue_and_chroma</a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.preprocessing.color_conversion.rgb_to_lab">
+<code class="descclassname">histomicstk.preprocessing.color_conversion.</code><code class="descname">rgb_to_lab</code><span class="sig-paren">(</span><em>im_rgb</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/preprocessing/color_conversion/rgb_to_lab.html#rgb_to_lab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.preprocessing.color_conversion.rgb_to_lab" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms an image from RGB to LAB color space</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>im_rgb</strong> (<em>array_like</em>) – An RGB image</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>im_lab</strong> – LAB representation of the input image <cite>im_rgb</cite>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array_like</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#histomicstk.preprocessing.color_conversion.lab_to_rgb" title="histomicstk.preprocessing.color_conversion.lab_to_rgb"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_conversion.lab_to_rgb()</span></code></a>, <a class="reference internal" href="histomicstk.preprocessing.color_normalization.html#histomicstk.preprocessing.color_normalization.reinhard" title="histomicstk.preprocessing.color_normalization.reinhard"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_normalization.reinhard()</span></code></a></p>
+</div>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td>D. Ruderman, T. Cronin, and C. Chiao, “Statistics of cone
+responses to natural images: implications for visual coding,”
+J. Opt. Soc. Am. A vol.15, pp.2036-2045, 1998.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.preprocessing.color_conversion.rgb_to_od">
+<code class="descclassname">histomicstk.preprocessing.color_conversion.</code><code class="descname">rgb_to_od</code><span class="sig-paren">(</span><em>im_rgb</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/preprocessing/color_conversion/rgb_to_od.html#rgb_to_od"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.preprocessing.color_conversion.rgb_to_od" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms input RGB image <cite>im_rgb</cite> into optical density space
+for color deconvolution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>im_rgb</strong> (<em>array_like</em>) – A floating-point RGB image with intensity ranges of [0, 255].</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>im_od</strong> – A floating-point image of corresponding optical density values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array_like</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#histomicstk.preprocessing.color_conversion.od_to_rgb" title="histomicstk.preprocessing.color_conversion.od_to_rgb"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_conversion.od_to_rgb()</span></code></a>, <a class="reference internal" href="#histomicstk.preprocessing.color_conversion.rgb_to_sda" title="histomicstk.preprocessing.color_conversion.rgb_to_sda"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_conversion.rgb_to_sda()</span></code></a>, <a class="reference internal" href="histomicstk.preprocessing.color_deconvolution.html#histomicstk.preprocessing.color_deconvolution.color_deconvolution" title="histomicstk.preprocessing.color_deconvolution.color_deconvolution"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_deconvolution.color_deconvolution()</span></code></a>, <a class="reference internal" href="histomicstk.preprocessing.color_deconvolution.html#histomicstk.preprocessing.color_deconvolution.color_convolution" title="histomicstk.preprocessing.color_deconvolution.color_convolution"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_deconvolution.color_convolution()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.preprocessing.color_conversion.rgb_to_sda">
+<code class="descclassname">histomicstk.preprocessing.color_conversion.</code><code class="descname">rgb_to_sda</code><span class="sig-paren">(</span><em>im_rgb</em>, <em>I_0</em>, <em>allow_negatives=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/preprocessing/color_conversion/rgb_to_sda.html#rgb_to_sda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.preprocessing.color_conversion.rgb_to_sda" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform input RGB image or matrix <cite>im_rgb</cite> into SDA (stain
+darkness) space for color deconvolution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>im_rgb</strong> (<em>array_like</em>) – Image (MxNx3) or matrix (3xN) of pixels</li>
+<li><strong>I_0</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em> or </em><em>array_like</em>) – Background intensity, either per-channel or for all channels</li>
+<li><strong>allow_negatives</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – If False, would-be negative values in the output are clipped to 0</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>im_sda</strong> – Shaped like <cite>im_rgb</cite>, with output values 0..255 where <cite>im_rgb</cite> &gt;= 1</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array_like</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For compatibility purposes, passing I_0=None invokes the behavior of
+rgb_to_od.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#histomicstk.preprocessing.color_conversion.sda_to_rgb" title="histomicstk.preprocessing.color_conversion.sda_to_rgb"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_conversion.sda_to_rgb()</span></code></a>, <a class="reference internal" href="#histomicstk.preprocessing.color_conversion.rgb_to_od" title="histomicstk.preprocessing.color_conversion.rgb_to_od"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_conversion.rgb_to_od()</span></code></a>, <a class="reference internal" href="histomicstk.preprocessing.color_deconvolution.html#histomicstk.preprocessing.color_deconvolution.color_deconvolution" title="histomicstk.preprocessing.color_deconvolution.color_deconvolution"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_deconvolution.color_deconvolution()</span></code></a>, <a class="reference internal" href="histomicstk.preprocessing.color_deconvolution.html#histomicstk.preprocessing.color_deconvolution.color_convolution" title="histomicstk.preprocessing.color_deconvolution.color_convolution"><code class="xref py py-func docutils literal"><span class="pre">histomicstk.preprocessing.color_deconvolution.color_convolution()</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="histomicstk.preprocessing.color_deconvolution.html" class="btn btn-neutral float-right" title="histomicstk.preprocessing.color_deconvolution" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="histomicstk.preprocessing.html" class="btn btn-neutral" title="histomicstk.preprocessing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Kitware, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,476 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>histomicstk.filters.shape &mdash; HistomicsTK 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="HistomicsTK 0.1.0 documentation" href="index.html"/>
+        <link rel="up" title="histomicstk.filters" href="histomicstk.filters.html"/>
+        <link rel="next" title="histomicstk.segmentation" href="histomicstk.segmentation.html"/>
+        <link rel="prev" title="histomicstk.filters.edge" href="histomicstk.filters.edge.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> HistomicsTK
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api-docs.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="histomicstk.html">histomicstk</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="histomicstk.utils.html">utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="histomicstk.preprocessing.html">preprocessing</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="histomicstk.filters.html">filters</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="histomicstk.filters.edge.html">edge/gradient filters</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">shape filters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="histomicstk.segmentation.html">segmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="histomicstk.features.html">features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HistomicsTK</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api-docs.html">API Documentation</a> &raquo;</li>
+        
+          <li><a href="histomicstk.html">histomicstk</a> &raquo;</li>
+        
+          <li><a href="histomicstk.filters.html">histomicstk.filters</a> &raquo;</li>
+        
+      <li>histomicstk.filters.shape</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/histomicstk.filters.shape.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="module-histomicstk.filters.shape">
+<span id="histomicstk-filters-shape"></span><h1>histomicstk.filters.shape<a class="headerlink" href="#module-histomicstk.filters.shape" title="Permalink to this headline">¶</a></h1>
+<p>This package contains functions to enhance and/or detect objects of different
+shapes (e.g. blobs, vessels)</p>
+<dl class="function">
+<dt id="histomicstk.filters.shape.cdog">
+<code class="descclassname">histomicstk.filters.shape.</code><code class="descname">cdog</code><span class="sig-paren">(</span><em>im_input</em>, <em>im_mask</em>, <em>sigma_min</em>, <em>sigma_max</em>, <em>num_octave_levels=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/filters/shape/cdog.html#cdog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.filters.shape.cdog" title="Permalink to this definition">¶</a></dt>
+<dd><p>SCale-adaptive Multiscale Difference-of-Gaussian (DoG) filter for
+nuclei/blob detection.</p>
+<p>Computes the maximal DoG response over a series of scales where in the
+applicable scales at each pixel are constrained to be below an upper-bound
+equal to 2 times the distance to the nearest non-nuclear/background pixel.</p>
+<p>This function uses an approach similar to SIFT interest detection
+where in the scale space between the specified min and max sigma values is
+divided into octaves (scale/sigma is doubled after each octave) and each
+octave is divided into sub-levels. The gaussian images are downsampled by 2
+at the end of each octave to keep the size of convolutional filters small.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>im_input</strong> (<em>array_like</em>) – A hematoxylin intensity image obtained from ColorDeconvolution. Objects
+are assumed to be dark with a light background.</li>
+<li><strong>mask</strong> (<em>array_like</em>) – A binary image where nuclei pixels have non-zero values</li>
+<li><strong>sigma_min</strong> (<em>double</em>) – Minumum sigma value for the scale space. For blob detection, set this
+equal to minimum-blob-radius / sqrt(2).</li>
+<li><strong>sigma_max</strong> (<em>double</em>) – Maximum sigma value for the scale space. For blob detection, set this
+equal to maximum-blob-radius / sqrt(2).</li>
+<li><strong>num_octave_levels</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Number of levels per octave in the scale space.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>im_dog_max</strong> (<em>array_like</em>) – An intensity image containing the maximal DoG response accross
+all scales for each pixel</li>
+<li><strong>im_sigma_max</strong> (<em>array_like</em>) – An intensity image containing the sigma value corresponding to the
+maximal LoG response at each pixel. The nuclei/blob radius for
+a given sigma value can be calculated as sigma * sqrt(2).</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[*]</td><td>D.G. Lowe “Distinctive image features from scale-invariant
+keypoints.” International journal of computer vision, vol. 60,
+no. 2, 91-110, 2004.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.filters.shape.clog">
+<code class="descclassname">histomicstk.filters.shape.</code><code class="descname">clog</code><span class="sig-paren">(</span><em>im_input</em>, <em>im_mask</em>, <em>sigma_min</em>, <em>sigma_max</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/filters/shape/clog.html#clog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.filters.shape.clog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constrainted Laplacian of Gaussian filter.</p>
+<p>Takes as input a grayscale nuclear image and binary mask of cell nuclei,
+and uses the distance transform of the nuclear mask to constrain the LoG
+filter response of the image for nuclear seeding. Returns a LoG filter
+image of type float. Local maxima are used for seeding cells.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>im_input</strong> (<em>array_like</em>) – A hematoxylin intensity image obtained from ColorDeconvolution. Objects
+are assumed to be dark with a light background.</li>
+<li><strong>im_mask</strong> (<em>array_like</em>) – A binary image where nuclei pixels have value 1/True, and non-nuclear
+pixels have value 0/False.</li>
+<li><strong>sigma_min</strong> (<em>double</em>) – Minumum sigma value for the scale space. For blob detection, set this
+equal to minimum-blob-radius / sqrt(2).</li>
+<li><strong>sigma_max</strong> (<em>double</em>) – Maximum sigma value for the scale space. For blob detection, set this
+equal to maximum-blob-radius / sqrt(2).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>im_log_max</strong> (<em>array_like</em>) – An intensity image containing the maximal LoG filter response accross
+all scales for each pixel</li>
+<li><strong>im_sigma_max</strong> (<em>array_like</em>) – An intensity image containing the sigma value corresponding to the
+maximal LoG response at each pixel. The nuclei/blob radius value for
+a given sigma can be estimated to be equal to sigma * sqrt(2).</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Y. Al-Kofahi et al “Improved Automatic Detection and Segmentation
+of Cell Nuclei in Histopathology Images” in IEEE Transactions on
+Biomedical Engineering,vol.57,no.4,pp.847-52, 2010.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.filters.shape.glog">
+<code class="descclassname">histomicstk.filters.shape.</code><code class="descname">glog</code><span class="sig-paren">(</span><em>im_input</em>, <em>alpha=1</em>, <em>range=array([ 1.5</em>, <em>1.6875</em>, <em>1.875</em>, <em>2.0625</em>, <em>2.25</em>, <em>2.4375</em>, <em>2.625</em>, <em>2.8125</em>, <em>3.    ])</em>, <em>theta=0.7853981633974483</em>, <em>tau=0.6</em>, <em>eps=0.6</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/filters/shape/glog.html#glog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.filters.shape.glog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs generalized Laplacian of Gaussian blob detection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>im_input</strong> (<em>array_like</em>) – A hematoxylin intensity image obtained from ColorDeconvolution.</li>
+<li><strong>alpha</strong> (<em>double</em>) – A positive scalar used to normalize the gLoG filter responses. Controls
+the blob-center detection and eccentricities of detected blobs. Larger
+values emphasize more eccentric blobs. Default value = 1.</li>
+<li><strong>range</strong> (<em>array_like</em>) – Scale range</li>
+<li><strong>theta</strong> (<em>double</em>) – Angular increment for rotating gLoG filters. Default value = np.pi / 6.</li>
+<li><strong>tau</strong> (<em>double</em>) – Tolerance for counting pixels in determining optimal scale SigmaC</li>
+<li><strong>eps</strong> (<em>double</em>) – range to define SigmaX surrounding SigmaC</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>Rsum</strong> (<em>array_like</em>) – Sum of filter responses at specified scales and orientations</li>
+<li><strong>Maxima</strong> (<em>: array_like</em>) – A binary mask highlighting maxima pixels</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Return values are returned as a namedtuple</p>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>H. Kong, H.C. Akakin, S.E. Sarma, “A Generalized Laplacian of
+Gaussian Filter for Blob Detection and Its Applications,” in IEEE
+Transactions on Cybernetics, vol.43,no.6,pp.1719-33, 2013.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="histomicstk.filters.shape.vesselness">
+<code class="descclassname">histomicstk.filters.shape.</code><code class="descname">vesselness</code><span class="sig-paren">(</span><em>im_input</em>, <em>sigma</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/histomicstk/filters/shape/vesselness.html#vesselness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#histomicstk.filters.shape.vesselness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates vesselness measure for grayscale image <cite>im_input</cite> at scale <cite>sigma</cite>.
+Also returns eigenvalues and vectors used for vessel salience filters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>im_input</strong> (<em>array_like</em>) – M x N grayscale image.</li>
+<li><strong>sigma</strong> (<em>double</em>) – standard deviation of gaussian kernel.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>Deviation</strong> (<em>array_like</em>) – M x N image of deviation from blob</li>
+<li><strong>Frobenius</strong> (<em>array_like</em>) – M x N image of frobenius norm of Hessian - measures presence of
+structure.</li>
+<li><strong>E</strong> (<em>array_like</em>) – M x N x 2 eigenvalue image - see eigen.py.</li>
+<li><strong>Theta</strong> (<em>array_like</em>) – M x N eigenvector angle image for E(:,:,0) in radians
+see eigen.py. Oriented parallel to vessel structures.</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>Frangi, Alejandro F., et al. “Multiscale vessel enhancement
+filtering.” Medical Image Computing and Computer-Assisted
+Interventation. MICCAI98. Springer Berlin Heidelberg,1998. 130-137.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="histomicstk.segmentation.html" class="btn btn-neutral float-right" title="histomicstk.segmentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="histomicstk.filters.edge.html" class="btn btn-neutral" title="histomicstk.filters.edge" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Kitware, Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
